@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-league',
@@ -6,8 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./league.component.scss']
 })
 export class LeagueComponent implements OnInit {
+  submitted = false;
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
+
+  onSubmit() {
+    console.log('###SUBMITTED!')
+    this.submitted = true;
+    this.router.navigate(['?summonerName=tugatom']);
+  }
 
   ngOnInit() {
   }
