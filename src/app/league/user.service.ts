@@ -1,23 +1,22 @@
 import { Injectable } from '@angular/core';
 import { User } from './user';
 import { Observable, of } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private userUrl = 'https://na1.api.riotgames.com';  // URL to web api
-  apiKey = 'RGAPI-8d77c9cc-5dcd-40aa-8ff9-6bc27d272c45';
-  userEndpoint = '/lol/summoner/v4/summoners/by-name/KingOfTryndamere'; // append summoner name
+  private userUrl = 'https://4fc2bs5006.execute-api.us-west-2.amazonaws.com/default/leagueAPIGateway';  // URL to web api
 
   private httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'X-Riot-Token': this.apiKey,
-      'Access-Control-Allow-Origin': '*'
-    })
+      'Content-Type': 'application/json'
+    }),
+    params: new HttpParams()
+      .set('endpoint', '/lol/summoner/v4/summoners/by-name/KingOfTryndamere')
+      .set('token', 'RGAPI-ca38f74e-fa36-4243-8799-ae8a5edcada3')
   };
 
   constructor(
@@ -25,13 +24,11 @@ export class UserService {
   ) { }
 
   getUser(username: string): Observable<User> {
-    const url = this.userUrl+this.userEndpoint;
-    console.log('GOT USER');
-    console.log(this.http);
+    const url = this.userUrl;
 
     return this.http.get<User>(url, this.httpOptions).pipe(
-/*       // tap(_ => this.log(`fetched User username=${username}`)),
-      // catchError(this.handleError<User>(`getUser username=${username}`)) */
+      // tap(_ => this.log(`fetched User username=${username}`)),
+      catchError(this.handleError<User>(`getUser username=${username}`))
     );
   }
 
