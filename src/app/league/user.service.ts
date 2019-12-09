@@ -23,7 +23,7 @@ export class UserService {
       }),
       params: new HttpParams()
         .set('endpoint', `/lol/league/v4/entries/by-summoner/${id}`)
-        .set('token', 'RGAPI-19ea67a7-0679-447f-82ea-23bfffda6731')
+        .set('token', 'RGAPI-9b4c2b3c-2ff7-46cb-b414-e09e6c38cdf2')
     };
 
     return this.http.get<User>(url, httpOptions).pipe(

@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
 import { Account } from '../account';
 import { UserService } from '../user.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from '../account.service';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-overview',
@@ -15,40 +16,49 @@ export class UserOverviewComponent implements OnInit {
   account: Account;
   summonerName: string;
   rankedEmblemSource: string;
+  profileIconSource: string;
 
   constructor(
     private userService: UserService,
     private accountService: AccountService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    // Find summonName URL parameter
-    this.route.queryParams.subscribe(
-      (params => {
-        this.getUser(params.summonerName);
-      }
-    ));
-  }
-
-  getUser(summonerName: string): void {
-    this.accountService.getAccount(summonerName)
-      .subscribe(account => {
+    this.route.params.pipe(
+      switchMap(params => {
+        return this.accountService.getAccount(params.summonerName);
+      })
+    ).subscribe(
+      account => {
         this.account = account;
-        this.getUserFromAccountId(account.id);
-      });
+        this.setupProfileIcon(account.profileIconId);
+        this.setupUser(account.id);
+      }
+    );
   }
 
-  getUserFromAccountId(id: string): void {
-    this.userService.getUser(this.account.id)
-      .subscribe(user => {
-        this.user = user[0];
-        this.setupRankedEmblem(this.user.tier);
-      });
+  setupUser(id: string) {
+    this.userService.getUser(id)
+      .subscribe(
+        user => {
+          this.user = user[0];
+          this.setupRankedEmblem(this.user.tier);
+        }
+      );
   }
 
   setupRankedEmblem(tier: string) {
     this.rankedEmblemSource = `/assets/ranked-emblems/Emblem_${tier}.png`;
   }
 
+  setupProfileIcon(profileIconId: number) {
+    this.profileIconSource = `/assets/profileicon/${profileIconId}.png`;
+  }
+
+  onSubmit(nameInput: string) {
+    console.log('###SUBMITTED: '+nameInput);
+    this.router.navigate([`/league/${nameInput}`]);
+  }
 }

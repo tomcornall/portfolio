@@ -13,10 +13,10 @@ export class LeagueComponent implements OnInit {
     private router: Router
   ) { }
 
-  onSubmit() {
-    console.log('###SUBMITTED!')
+  onSubmit(nameInput: string) {
+    console.log('###SUBMITTED: '+nameInput);
     this.submitted = true;
-    this.router.navigate(['?summonerName=tugatom']);
+    this.router.navigate([`/league/${nameInput}`]);
   }
 
   ngOnInit() {
