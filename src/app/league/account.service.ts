@@ -10,7 +10,6 @@ import { catchError, map, tap } from 'rxjs/operators';
 export class AccountService {
   // TODO: MOVE to a different service.
   private apiUrl = 'https://4fc2bs5006.execute-api.us-west-2.amazonaws.com/default/leagueAPIGateway';  // URL to web api
-
   // end todo... 
 
   constructor(
@@ -26,7 +25,7 @@ export class AccountService {
       }),
       params: new HttpParams()
         .set('endpoint', `/lol/summoner/v4/summoners/by-name/${summonerName}`)
-        .set('token', 'RGAPI-19ea67a7-0679-447f-82ea-23bfffda6731')
+        .set('token', 'RGAPI-9b4c2b3c-2ff7-46cb-b414-e09e6c38cdf2')
     };
 
     return this.http.get<Account>(url, httpOptions).pipe(

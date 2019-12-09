@@ -1,8 +1,33 @@
-<p>user-overview works!</p>
-{{account.id}}
+<h3>Common picks:</h3>
+<a routerLink="/league/KingOfTryndamere">go to KingOfTryndamere~~~!</a>
 <br>
-{{user.tier}}
+<a routerLink="/league/tugatom">go to tugatom~~~!</a>
+
+<div>
+    <h1>Summoner Form</h1>
+      <div>
+        <label for="nameInput">Summoner Name</label>
+        <input type="text" id="nameInput" #nameInput required>
+      </div>
+
+      <button (click)="onSubmit(nameInput.value)">Submit</button>
+
+</div>
+
+
+<p>user-overview works!</p>
+
+
+
+
+
+AccountId: {{account.id}}
+<br>
+<img [src]="profileIconSource" />
+
 <img [src]="rankedEmblemSource" />
+
+<h4>User Data</h4>
 <br>leagueId: {{user.leagueId}}
 <br>queueType: {{user.queueType}}
 <br>tier: {{user.tier}}
@@ -16,3 +41,12 @@
 <br>inactive: {{user.inactive}}
 <br>freshBlood: {{user.freshBlood}}
 <br>hotStreak: {{user.hotStreak}}
+
+<h4>Account Data</h4>
+<br>profileIconId: {{account.profileIconId}}
+<br>name: {{account.name}}
+<br>puuid: {{account.puuid}}
+<br>summonerLevel: {{account.summonerLevel}}
+<br>accountId: {{account.accountId}}
+<br>id: {{account.id}}
+<br>revisionDate: {{account.revisionDate}}
