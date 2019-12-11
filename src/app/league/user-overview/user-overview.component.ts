@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { RankedEntry } from '../ranked-entry';
 import { RankedEntriesService } from '../ranked-entries.service';
 import { Account } from '../account';
-import { PlayedChampion } from '../playedChampion';
 import { AccountService } from '../account.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
@@ -18,14 +17,16 @@ export class UserOverviewComponent implements OnInit {
   rankedFlexTT: RankedEntry;
   account: Account;
   profileIconSource: string;
-  mostPlayedChampions: PlayedChampion[];
+  defaultProfileIconSource: string;
 
   constructor(
     private rankedEntriesService: RankedEntriesService,
     private accountService: AccountService,
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {
+    this.defaultProfileIconSource = `/assets/profileicon/23.png`;
+  }
 
   ngOnInit() {
     this.route.params.pipe(
