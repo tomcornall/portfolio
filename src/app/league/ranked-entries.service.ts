@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { User } from './user';
+import { RankedEntry } from './ranked-entry';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -7,14 +7,14 @@ import { catchError, map, tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class RankedEntriesService {
   private userUrl = 'https://4fc2bs5006.execute-api.us-west-2.amazonaws.com/default/leagueAPIGateway';  // URL to web api
 
   constructor(
     private http: HttpClient
   ) { }
 
-  getUser(id: string): Observable<User> {
+  getRankedEntries(id: string): Observable<RankedEntry[]> {
     const url = this.userUrl;
 
     const httpOptions = {
@@ -23,12 +23,12 @@ export class UserService {
       }),
       params: new HttpParams()
         .set('endpoint', `/lol/league/v4/entries/by-summoner/${id}`)
-        .set('token', 'RGAPI-9b4c2b3c-2ff7-46cb-b414-e09e6c38cdf2')
+        .set('token', 'RGAPI-612d9fd8-3f63-46a1-9e70-9126347257b4')
     };
 
-    return this.http.get<User>(url, httpOptions).pipe(
-      tap(_ => console.log(`fetched User id=${id}`)),
-      catchError(this.handleError<User>(`getUser id=${id}`))
+    return this.http.get<RankedEntry[]>(url, httpOptions).pipe(
+      tap(_ => console.log(`fetched RankedEntry id=${id}`)),
+      catchError(this.handleError<RankedEntry[]>(`getRankedEntry id=${id}`))
     );
   }
 
@@ -44,7 +44,7 @@ export class UserService {
       console.error(error); // log to console instead
 
       // TODO: better job of transforming error for user consumption
-      console.log(`UserService: ${operation} failed: ${error.message}`);
+      console.log(`RankedEntriesService: ${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result.
       return of(result as T);

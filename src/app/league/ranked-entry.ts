@@ -1,4 +1,4 @@
-export class User {
+export class RankedEntry {
     leagueId: string;
     queueType: string;
     tier: string;
@@ -12,4 +12,6 @@ export class User {
     inactive: boolean;
     freshBlood: boolean;
     hotStreak: boolean;
+    winrate?: number;
+    emblemImageSource?: string;
 }

@@ -1,3 +1,4 @@
+<p>user-overview works!</p>
 <h3>Common picks:</h3>
 <a routerLink="/league/KingOfTryndamere">go to KingOfTryndamere~~~!</a>
 <br>
@@ -11,42 +12,67 @@
       </div>
 
       <button (click)="onSubmit(nameInput.value)">Submit</button>
+</div>
 
+<h4>{{account.name}}</h4>
+<img [src]="profileIconSource" class="profileImage"/>
+
+<h3>Rank</h3>
+<div>
+    Ranked Solo Queue
+    <div *ngIf="rankedSoloQueue else soloQueueEmpty">
+        <img [src]="rankedSoloQueue.emblemImageSource" class="rankedEmblemImage"/>
+        {{rankedSoloQueue.tier | titlecase}} {{rankedSoloQueue.rank}}
+        {{rankedSoloQueue.leaguePoints}} LP / {{rankedSoloQueue.wins}}W {{rankedSoloQueue.losses}}L / {{rankedSoloQueue.winrate | number:'1.0-0'}}%
+    </div>
+    <ng-template #soloQueueEmpty>
+        Unranked
+    </ng-template>
+</div>
+<div>
+    Ranked Flex Queue
+    <div *ngIf="rankedFlexSR else flexTTEmpty">
+        <img [src]="rankedFlexSR.emblemImageSource" class="rankedEmblemImage"/>
+        {{rankedFlexSR.tier | titlecase}} {{rankedFlexSR.rank}}
+        {{rankedFlexSR.leaguePoints}} LP / {{rankedFlexSR.wins}}W {{rankedFlexSR.losses}}L / {{rankedFlexSR.winrate | number:'1.0-0'}}%
+    </div>
+    <ng-template #flexTTEmpty>
+        Unranked
+    </ng-template>
+</div>
+<div>
+    Flex Queue Twisted Treeline
+    <div *ngIf="rankedFlexTT else flexTTEmpty">
+        <img [src]="rankedFlexTT.emblemImageSource" class="rankedEmblemImage"/>
+        {{rankedFlexTT.tier | titlecase}} {{rankedFlexTT.rank}}
+        {{rankedFlexTT.leaguePoints}} LP / {{rankedFlexTT.wins}}W {{rankedFlexTT.losses}}L / {{rankedFlexTT.winrate | number:'1.0-0'}}%
+    </div>
+    <ng-template #flexTTEmpty>
+        Unranked
+    </ng-template>
+</div>
+
+<h3>Most Played: Ranked Solo Queue</h3>
+<div *ngFor="mostPlayedChampions as champion">
+    <img [src]="champion.imageSource" class="champion.imageSource"/>
+    {{champion.name}}
+    {{champion.averageCS}}
+    {{champion.KDA}}
+    {{champion.averageKills}}
+    {{champion.averageDeaths}}
+    {{champion.averageAssists}}
+    {{champion.winrate}}
+    {{champion.gamesPlayed}}
 </div>
 
 
-<p>user-overview works!</p>
-
-
-
-
-
-AccountId: {{account.id}}
-<br>
-<img [src]="profileIconSource" />
-
-<img [src]="rankedEmblemSource" />
-
-<h4>User Data</h4>
-<br>leagueId: {{user.leagueId}}
-<br>queueType: {{user.queueType}}
-<br>tier: {{user.tier}}
-<br>rank: {{user.rank}}
-<br>summonerId: {{user.summonerId}}
-<br>summonerName: {{user.summonerName}}
-<br>leaguePoints: {{user.leaguePoints}}
-<br>wins: {{user.wins}}
-<br>losses: {{user.losses}}
-<br>veteran: {{user.veteran}}
-<br>inactive: {{user.inactive}}
-<br>freshBlood: {{user.freshBlood}}
-<br>hotStreak: {{user.hotStreak}}
-
 <h4>Account Data</h4>
-<br>profileIconId: {{account.profileIconId}}
-<br>name: {{account.name}}
-<br>puuid: {{account.puuid}}
-<br>summonerLevel: {{account.summonerLevel}}
-<br>accountId: {{account.accountId}}
-<br>id: {{account.id}}
-<br>revisionDate: {{account.revisionDate}}
+profileIconId: {{account.profileIconId}}<br>
+name: {{account.name}}<br>
+puuid: {{account.puuid}}<br>
+summonerLevel: {{account.summonerLevel}}<br>
+accountId: {{account.accountId}}<br>
+id: {{account.id}}<br>
+revisionDate: {{account.revisionDate}}<br>
+
+

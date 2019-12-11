@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../user';
+import { RankedEntry } from '../ranked-entry';
+import { RankedEntriesService } from '../ranked-entries.service';
 import { Account } from '../account';
-import { UserService } from '../user.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { PlayedChampion } from '../playedChampion';
 import { AccountService } from '../account.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 
 @Component({
@@ -12,14 +13,15 @@ import { switchMap } from 'rxjs/operators';
   styleUrls: ['./user-overview.component.scss']
 })
 export class UserOverviewComponent implements OnInit {
-  user: User;
+  rankedSoloQueue: RankedEntry;
+  rankedFlexSR: RankedEntry;
+  rankedFlexTT: RankedEntry;
   account: Account;
-  summonerName: string;
-  rankedEmblemSource: string;
   profileIconSource: string;
+  mostPlayedChampions: PlayedChampion[];
 
   constructor(
-    private userService: UserService,
+    private rankedEntriesService: RankedEntriesService,
     private accountService: AccountService,
     private route: ActivatedRoute,
     private router: Router
@@ -40,17 +42,35 @@ export class UserOverviewComponent implements OnInit {
   }
 
   setupUser(id: string) {
-    this.userService.getUser(id)
+    this.rankedEntriesService.getRankedEntries(id)
       .subscribe(
-        user => {
-          this.user = user[0];
-          this.setupRankedEmblem(this.user.tier);
+        rankedEntries => {
+          rankedEntries.forEach(entry => {
+            switch (entry.queueType) {
+              case "RANKED_SOLO_5x5":
+                this.rankedSoloQueue = entry;
+                this.setupRankedData(this.rankedSoloQueue);
+                break;
+              case "RANKED_FLEX_SR":
+                this.rankedFlexSR = entry;
+                this.setupRankedData(this.rankedFlexSR);
+                break;
+              case "RANKED_FLEX_TT":
+                this.rankedFlexTT = entry;
+                this.setupRankedData(this.rankedFlexTT);
+                break;
+              default:
+                // do nothing
+                break;
+            }
+          });
         }
       );
   }
 
-  setupRankedEmblem(tier: string) {
-    this.rankedEmblemSource = `/assets/ranked-emblems/Emblem_${tier}.png`;
+  setupRankedData(entry: RankedEntry) {
+    entry.emblemImageSource = `/assets/ranked-emblems/Emblem_${entry.tier}.png`;
+    entry.winrate = entry.wins / (entry.wins + entry.losses) * 100;
   }
 
   setupProfileIcon(profileIconId: number) {
