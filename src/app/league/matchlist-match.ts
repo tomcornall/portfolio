@@ -5,7 +5,7 @@ export class MatchlistMatch {
     gameId: number;
     champion: number;
     platformId: string;
-    timestamp: number;
+    timestamp: string;
     queue: number;
     role: string;
     season: number;
