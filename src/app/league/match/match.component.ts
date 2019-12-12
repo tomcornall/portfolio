@@ -26,16 +26,7 @@ export class MatchComponent implements OnInit {
   }
 
   setupMatchData(match: MatchlistMatch) {
-    console.log(Queues);
-    let queueArray = Queues;
-    console.log(queueArray);
-    // let queue = Queues.find(queue => queue.queueId === match.queue);
-
-    // if (queue) {
-    //   match.type = queue.description;
-    // } else {
-    //   match.type = 'Unknown';
-    // }
+    match.type = Queues.array.find(queue => queue.queueId === match.queue).description;
   }
 
 }
