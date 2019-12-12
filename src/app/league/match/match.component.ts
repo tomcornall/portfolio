@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MatchService } from '../match.service';
+import { LeagueApiService } from '../league-api.service';
 import { MatchlistMatch } from '../matchlist-match';
 import * as Queues from '../../../assets/queues.json';
 
@@ -12,11 +12,11 @@ export class MatchComponent implements OnInit {
   @Input() match: MatchlistMatch;
 
   constructor(
-    private matchService: MatchService,
+    private leagueApiService: LeagueApiService,
   ) { }
 
   ngOnInit() {
-    this.matchService.getMatchTimeline(this.match.gameId)
+    this.leagueApiService.getMatchTimeline(this.match.gameId)
       .subscribe(
         matchTimeline => {
           this.match.timeline = matchTimeline;

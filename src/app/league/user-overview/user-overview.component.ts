@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { RankedEntry } from '../ranked-entry';
-import { RankedEntriesService } from '../ranked-entries.service';
+import { LeagueApiService } from '../league-api.service';
 import { Account } from '../account';
-import { AccountService } from '../account.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-import { MatchService } from '../match.service';
 import { Matchlist } from '../matchlist';
 import { MatchlistMatch } from '../matchlist-match';
 
@@ -25,9 +23,7 @@ export class UserOverviewComponent implements OnInit {
   matchlistMatches: MatchlistMatch[];
 
   constructor(
-    private rankedEntriesService: RankedEntriesService,
-    private accountService: AccountService,
-    private matchService: MatchService,
+    private leagueApiService: LeagueApiService,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -37,10 +33,12 @@ export class UserOverviewComponent implements OnInit {
   ngOnInit() {
     this.route.params.pipe(
       switchMap(params => {
-        return this.accountService.getAccount(params.summonerName);
+        return this.leagueApiService.getAccount(params.summonerName);
       })
     ).subscribe(
       account => {
+        console.log('got account!###');
+        console.log(account);
         this.account = account;
         this.setupProfileIcon(account.profileIconId);
         this.setupUser(account.id);
@@ -50,14 +48,14 @@ export class UserOverviewComponent implements OnInit {
   }
 
   setupMatches(accountId: string) {
-    this.matchService.getMatchlist(accountId)
+    this.leagueApiService.getMatchlist(accountId)
       .subscribe(
         matchlist => {
           this.matchlist = matchlist;
           this.matchlistMatches = matchlist.matches;
 
           // this.matchlistMatches.forEach(match => {
-          //   this.matchService.getMatchTimeline(match.gameId)
+          //   this.leagueApiService.getMatchTimeline(match.gameId)
           //     .subscribe(
           //       matchTimeline => {
           //         match.timeline = matchTimeline;
@@ -71,7 +69,7 @@ export class UserOverviewComponent implements OnInit {
   }
 
   setupUser(id: string) {
-    this.rankedEntriesService.getRankedEntries(id)
+    this.leagueApiService.getRankedEntries(id)
       .subscribe(
         rankedEntries => {
           rankedEntries.forEach(entry => {
