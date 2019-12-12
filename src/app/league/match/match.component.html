@@ -14,8 +14,9 @@ TIMELINE: {{match.timeline.frameInterval}} <br>
 //////data to fill////
 <br>
 
-{{match.type}}
-{{match.date}}
+Type: {{match.type}}<br>
+Timestamp: {{ match.timestamp | date: 'MMM d' }}<br>   
+Timestamp: {{ match.timestamp | timeAgo }}<br>   
 {{match.daysAgo}} days/weeks/months ago
 {{match.result}}
 {{match.length}}
