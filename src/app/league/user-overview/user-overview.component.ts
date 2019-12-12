@@ -99,7 +99,12 @@ export class UserOverviewComponent implements OnInit {
 
   setupRankedData(entry: RankedEntry) {
     entry.emblemImageSource = `/assets/ranked-emblems/Emblem_${entry.tier}.png`;
-    entry.winrate = entry.wins / (entry.wins + entry.losses) * 100;
+
+    if (entry.losses) {
+      entry.winrate = entry.wins / (entry.wins + entry.losses) * 100;
+    } else {
+      entry.winrate = 100;
+    }
   }
 
   setupProfileIcon(profileIconId: number) {
