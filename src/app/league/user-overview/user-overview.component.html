@@ -72,36 +72,10 @@
     {{champion.gamesPlayed}}
 </div> -->
 
-<!-- <h3>Match History</h3>
-<div *ngFor="matches as match">
+<h3>Match History</h3>
+<div *ngFor="let match of matchlistMatches">
     <app-match [match]="match"></app-match>
-    {{match.type}}
-    {{match.date}}
-    {{match.daysAgo}} days/weeks/months ago
-    {{match.result}}
-    {{match.length}}
-    {{match.championName}}
-    <img [src]="match.championImageSource" class="championImage"/>
-    <img [src]="match.positionImageSource" class="positionImage"/>
-    {{match.summonerSpell1}}
-    {{match.summonerSpell2}}
-    {{match.keystone}}
-    {{match.secondaryRune}}
-    {{match.kills}} / {{match.deaths}} / {{match.assists}}
-    {{match.kda}}
-    {{(match.killSpree}}
-    {{match.level}}
-    {{match.cs}}
-    {{match.csPerMin}}
-    <img [src]="match.item1ImageSource" class="itemImage"/>
-    <img [src]="match.item2ImageSource" class="itemImage"/>
-    <img [src]="match.item3ImageSource" class="itemImage"/>
-    <img [src]="match.item4ImageSource" class="itemImage"/>
-    <img [src]="match.item5ImageSource" class="itemImage"/>
-    <img [src]="match.item6ImageSource" class="itemImage"/>
-    <img [src]="match.trinketImageSource" class="itemImage"/>
-</div> -->
-
+</div>
 
 <h4>Account Data</h4>
 profileIconId: {{account.profileIconId}}<br>

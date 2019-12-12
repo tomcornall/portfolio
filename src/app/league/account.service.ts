@@ -25,7 +25,7 @@ export class AccountService {
       }),
       params: new HttpParams()
         .set('endpoint', `/lol/summoner/v4/summoners/by-name/${summonerName}`)
-        .set('token', 'RGAPI-612d9fd8-3f63-46a1-9e70-9126347257b4')
+        .set('token', 'RGAPI-05315f61-bd45-4418-aa8c-ae7a6bac14f7')
     };
 
     return this.http.get<Account>(url, httpOptions).pipe(

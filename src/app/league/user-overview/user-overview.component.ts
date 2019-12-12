@@ -5,6 +5,9 @@ import { Account } from '../account';
 import { AccountService } from '../account.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import { MatchService } from '../match.service';
+import { Matchlist } from '../matchlist';
+import { MatchlistMatch } from '../matchlist-match';
 
 @Component({
   selector: 'app-user-overview',
@@ -18,10 +21,13 @@ export class UserOverviewComponent implements OnInit {
   account: Account;
   profileIconSource: string;
   defaultProfileIconSource: string;
+  matchlist: Matchlist;
+  matchlistMatches: MatchlistMatch[];
 
   constructor(
     private rankedEntriesService: RankedEntriesService,
     private accountService: AccountService,
+    private matchService: MatchService,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -38,8 +44,30 @@ export class UserOverviewComponent implements OnInit {
         this.account = account;
         this.setupProfileIcon(account.profileIconId);
         this.setupUser(account.id);
+        this.setupMatches(account.accountId);
       }
     );
+  }
+
+  setupMatches(accountId: string) {
+    this.matchService.getMatchlist(accountId)
+      .subscribe(
+        matchlist => {
+          this.matchlist = matchlist;
+          this.matchlistMatches = matchlist.matches;
+
+          // this.matchlistMatches.forEach(match => {
+          //   this.matchService.getMatchTimeline(match.gameId)
+          //     .subscribe(
+          //       matchTimeline => {
+          //         match.timeline = matchTimeline;
+          //       }
+          //     )
+          //   // match.timeline = 
+          // });
+          console.log(matchlist);
+        }
+      )
   }
 
   setupUser(id: string) {
