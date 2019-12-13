@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+    class="game-participantsstyles__RoleIcon-sc-2v6myp-4 iLAXMU">
+    <g fill="none" fill-rule="nonzero">
+        <polygon points="3.2 11.3 3.2 3.2 11.3 3.2 14.5 0 0 0 0 14.5" fill="#FFF"></polygon>
+        <polygon points="12.8 4.7 12.8 12.8 4.7 12.8 1.5 16 16 16 16 1.5" fill="#8890B5"></polygon>
+        <circle cx="8" cy="8" r="3.6" fill="#8890B5"></circle>
+    </g>
+</svg>
