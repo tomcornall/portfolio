@@ -18,15 +18,15 @@ export class LeagueApiService {
       'Content-Type': 'application/json'
     }),
     params: new HttpParams()
-      .set('token', 'RGAPI-05315f61-bd45-4418-aa8c-ae7a6bac14f7')
+      .set('token', 'RGAPI-a407067e-f868-4c30-b620-908452a4bc5e')
   };
 
   constructor(
     private http: HttpClient
   ) { }
 
-  getMatchlist(id: number): Observable<Matchlist> {
-    this.httpOptions.params = this.httpOptions.params.set('endpoint', `/lol/match/v4/matchlists/by-account/${id}?endIndex=15`);
+  getMatchlist(id: string): Observable<Matchlist> {
+    this.httpOptions.params = this.httpOptions.params.set('endpoint', `/lol/match/v4/matchlists/by-account/${id}?endIndex=5`);
 
     return this.http.get<Matchlist>(this.url, this.httpOptions).pipe(
       tap(_ => console.log(`fetched Matchlist id=${id}`)),

@@ -4,7 +4,7 @@ import { Match } from './match';
 export class MatchlistMatch {
     lane: string;
     gameId: number;
-    champion: number;
+    champion: string;
     platformId: string;
     timestamp: string;
     queue: number;

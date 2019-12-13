@@ -14,4 +14,6 @@ export class Match {
     gameCreation: number;
     type?: string;
     result?: string;
+    team1Participants: any[];
+    team2Participants: any[];
 }

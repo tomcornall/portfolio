@@ -18,7 +18,26 @@ Timestamp: {{ match.gameCreation | date: 'MMM d' }}<br>
 Timestamp: {{ match.gameCreation | timeAgo }}<br>   
 {{match.result}}<br>
 {{match.gameDuration | secondsToTime}}<br>
-{{match.championName}}
+
+
+LIST OF SUMMONERS:<br>
+<div *ngFor="let participant of match.team1Participants">
+    {{participant.participantIdentity.player.summonerName}}:
+    {{participant.champion.name}}
+    <img src="../../../assets/champion/{{participant.champion.image.full}}" class="championSprite"/>
+</div>
+<div *ngFor="let participant of match.team2Participants">
+    {{participant.participantIdentity.player.summonerName}}:
+    {{participant.champion.name}}
+    <img src="../../../assets/champion/{{participant.champion.image.full}}" class="championSprite"/>
+</div>
+<!-- <img src="../../../assets/positions/Position_Silver-Top.png"/> -->
+<img src="../../../assets/positions/top-position-icon.svg"/>
+<!-- <img src="../../../assets/positions/top-position.svg"/>
+ -->
+
+
+<!-- {{match.championName}}
 <img [src]="match.championImageSource" class="championImage"/>
 <img [src]="match.positionImageSource" class="positionImage"/>
 {{match.summonerSpell1}}
@@ -37,4 +56,4 @@ Timestamp: {{ match.gameCreation | timeAgo }}<br>
 <img [src]="match.item4ImageSource" class="itemImage"/>
 <img [src]="match.item5ImageSource" class="itemImage"/>
 <img [src]="match.item6ImageSource" class="itemImage"/>
-<img [src]="match.trinketImageSource" class="itemImage"/>
+<img [src]="match.trinketImageSource" class="itemImage"/> -->
