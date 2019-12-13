@@ -16,8 +16,8 @@
 Type: {{match.type}}<br>
 Timestamp: {{ match.gameCreation | date: 'MMM d' }}<br>   
 Timestamp: {{ match.gameCreation | timeAgo }}<br>   
-{{match.result}}
-{{match.gameDuration}}
+{{match.result}}<br>
+{{match.gameDuration | secondsToTime}}<br>
 {{match.championName}}
 <img [src]="match.championImageSource" class="championImage"/>
 <img [src]="match.positionImageSource" class="positionImage"/>

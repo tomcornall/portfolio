@@ -7,9 +7,10 @@ import { LeagueComponent } from './league.component';
 import { UserOverviewComponent } from './user-overview/user-overview.component';
 import { MatchComponent } from './match/match.component';
 import { TimeAgoPipe } from 'time-ago-pipe';
+import { SecondsToTimePipe } from './seconds-to-time.pipe';
 
 @NgModule({
-  declarations: [LeagueComponent, UserOverviewComponent, MatchComponent, TimeAgoPipe],
+  declarations: [LeagueComponent, UserOverviewComponent, MatchComponent, TimeAgoPipe, SecondsToTimePipe],
   imports: [
     CommonModule,
     LeagueRoutingModule,
