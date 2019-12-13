@@ -53,17 +53,6 @@ export class UserOverviewComponent implements OnInit {
         matchlist => {
           this.matchlist = matchlist;
           this.matchlistMatches = matchlist.matches;
-
-          // this.matchlistMatches.forEach(match => {
-          //   this.leagueApiService.getMatchTimeline(match.gameId)
-          //     .subscribe(
-          //       matchTimeline => {
-          //         match.timeline = matchTimeline;
-          //       }
-          //     )
-          //   // match.timeline = 
-          // });
-          console.log(matchlist);
         }
       )
   }
@@ -87,7 +76,7 @@ export class UserOverviewComponent implements OnInit {
                 this.setupRankedData(this.rankedFlexTT);
                 break;
               default:
-                // do nothing
+                // nothing to do
                 break;
             }
           });

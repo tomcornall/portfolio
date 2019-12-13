@@ -1,4 +1,5 @@
 import { MatchTimeline } from './match-timeline';
+import { Match } from './match';
 
 export class MatchlistMatch {
     lane: string;
@@ -10,5 +11,5 @@ export class MatchlistMatch {
     role: string;
     season: number;
     timeline: MatchTimeline;
-    type?: string;
+    match: Match;
 }

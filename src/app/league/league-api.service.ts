@@ -4,6 +4,7 @@ import { Matchlist } from './matchlist';
 import { tap, catchError } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { MatchTimeline } from './match-timeline';
+import { Match } from './match';
 import { Account } from './account';
 import { RankedEntry } from './ranked-entry';
 
@@ -24,12 +25,21 @@ export class LeagueApiService {
     private http: HttpClient
   ) { }
 
-  getMatchlist(id: string): Observable<Matchlist> {
+  getMatchlist(id: number): Observable<Matchlist> {
     this.httpOptions.params = this.httpOptions.params.set('endpoint', `/lol/match/v4/matchlists/by-account/${id}?endIndex=15`);
 
     return this.http.get<Matchlist>(this.url, this.httpOptions).pipe(
       tap(_ => console.log(`fetched Matchlist id=${id}`)),
       catchError(this.handleError<Matchlist>(`getMatchlist id=${id}`))
+    );
+  }
+
+  getMatch(id: number): Observable<Match> {
+    this.httpOptions.params = this.httpOptions.params.set('endpoint', `/lol/match/v4/matches/${id}`);
+
+    return this.http.get<Match>(this.url, this.httpOptions).pipe(
+      tap(_ => console.log(`fetched Match id=${id}`)),
+      catchError(this.handleError<Match>(`getMatch id=${id}`))
     );
   }
 

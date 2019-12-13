@@ -2,14 +2,16 @@ export class Match {
     seasonId: number;
     queueId: number;
     gameId: number;
-    participantIdentities: [];
+    participantIdentities: any[];
     gameVersion: string;
     platformId: string;
     gameMode: string;
     mapId: number;
     gameType: string;
-    teams: [];
-    participants: [];
+    teams: any[];
+    participants: any[];
     gameDuration: number;
     gameCreation: number;
+    type?: string;
+    result?: string;
 }

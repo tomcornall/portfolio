@@ -1,13 +1,12 @@
 <p>match works!</p>
-TIMELINE: {{match.timeline.frameInterval}} <br> 
-{{match.lane}} ###<br>
-{{match.gameId}} ###<br>
-{{match.champion}} ###<br>
-{{match.platformId}} ###<br>
-{{match.timestamp}} ###<br>
-{{match.queue}} ###<br>
-{{match.role}} ###<br>
-{{match.season}} ###<br>
+{{matchlistMatch.lane}} ###<br>
+{{matchlistMatch.gameId}} ###<br>
+{{matchlistMatch.champion}} ###<br>
+{{matchlistMatch.platformId}} ###<br>
+{{matchlistMatch.timestamp}} ###<br>
+{{matchlistMatch.queue}} ###<br>
+{{matchlistMatch.role}} ###<br>
+{{matchlistMatch.season}} ###<br>
 
 
 <br>
@@ -15,10 +14,10 @@ TIMELINE: {{match.timeline.frameInterval}} <br>
 <br>
 
 Type: {{match.type}}<br>
-Timestamp: {{ match.timestamp | date: 'MMM d' }}<br>   
-Timestamp: {{ match.timestamp | timeAgo }}<br>   
+Timestamp: {{ match.gameCreation | date: 'MMM d' }}<br>   
+Timestamp: {{ match.gameCreation | timeAgo }}<br>   
 {{match.result}}
-{{match.length}}
+{{match.gameDuration}}
 {{match.championName}}
 <img [src]="match.championImageSource" class="championImage"/>
 <img [src]="match.positionImageSource" class="positionImage"/>
