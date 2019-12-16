@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+// import { FormsModule } from '@angular/forms';
 
 import { LeagueRoutingModule } from './league-routing.module';
 import { LeagueComponent } from './league.component';
@@ -14,7 +14,7 @@ import { SecondsToTimePipe } from './seconds-to-time.pipe';
   imports: [
     CommonModule,
     LeagueRoutingModule,
-    FormsModule
+    // FormsModule
   ]
 })
 export class LeagueModule { }

@@ -80,8 +80,8 @@ export class MatchComponent implements OnInit {
       participant.cs = participant.stats.totalMinionsKilled + participant.stats.neutralMinionsKilled;
       participant.csPerMin = participant.cs / (match.gameDuration / 60);
 
-      // items
-      for (let index = 0; index < 6; index++) {
+      // items go up to item6
+      for (let index = 0; index < 7; index++) {
         console.log(index);
         let string = participant.stats["item" + index.toString()];
         if (string) {
