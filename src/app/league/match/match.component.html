@@ -1,17 +1,4 @@
 <p>match works!</p>
-{{matchlistMatch.lane}} ###<br>
-{{matchlistMatch.gameId}} ###<br>
-{{matchlistMatch.champion}} ###<br>
-{{matchlistMatch.platformId}} ###<br>
-{{matchlistMatch.timestamp}} ###<br>
-{{matchlistMatch.queue}} ###<br>
-{{matchlistMatch.role}} ###<br>
-{{matchlistMatch.season}} ###<br>
-
-
-<br>
-//////data to fill////
-<br>
 
 Type: {{match.type}}<br>
 Timestamp: {{ match.gameCreation | date: 'MMM d' }}<br>   
@@ -20,40 +7,79 @@ Timestamp: {{ match.gameCreation | timeAgo }}<br>
 {{match.gameDuration | secondsToTime}}<br>
 
 
-LIST OF SUMMONERS:<br>
-<div *ngFor="let participant of match.team1Participants">
-    {{participant.participantIdentity.player.summonerName}}:
-    {{participant.champion.name}}
-    <img src="../../../assets/champion/{{participant.champion.image.full}}" class="championSprite"/>
-</div>
-<div *ngFor="let participant of match.team2Participants">
-    {{participant.participantIdentity.player.summonerName}}:
-    {{participant.champion.name}}
-    <img src="../../../assets/champion/{{participant.champion.image.full}}" class="championSprite"/>
-</div>
-<!-- <img src="../../../assets/positions/Position_Silver-Top.png"/> -->
-<img src="../../../assets/positions/top-position-icon.svg"/>
-<!-- <img src="../../../assets/positions/top-position.svg"/>
- -->
+<h3>Main Participant:</h3>
+{{mainParticipant.participantIdentity.player.summonerName}}:
+{{mainParticipant.champion.name}}
+<img src="../../../assets/champion/{{mainParticipant.champion.image.full}}" class="championSprite"/>
+<img src="../../../assets/small.gif"
+    [ngStyle]="mainParticipant.spell1Style"
+/>
+<img src="../../../assets/small.gif"
+    [ngStyle]="mainParticipant.spell2Style"
+/>
 
+<img [src]="mainParticipant.perk0Image"/>
+<img [src]="mainParticipant.perk1Image"/>
+<img [src]="mainParticipant.perk2Image"/>
+<img [src]="mainParticipant.perk3Image"/>
+<img [src]="mainParticipant.perk4Image"/>
+<img [src]="mainParticipant.perk5Image"/>
 
-<!-- {{match.championName}}
-<img [src]="match.championImageSource" class="championImage"/>
-<img [src]="match.positionImageSource" class="positionImage"/>
-{{match.summonerSpell1}}
-{{match.summonerSpell2}}
-{{match.keystone}}
-{{match.secondaryRune}}
-{{match.kills}} / {{match.deaths}} / {{match.assists}}
-{{match.kda}}
+<img [src]="mainParticipant.perkSubStyleImage"/>
+
+KILLS/DEATHS/ASSISTS: {{mainParticipant.stats.kills}} / {{mainParticipant.stats.deaths}} / {{mainParticipant.stats.assists}}<br>
+KDA: {{mainParticipant.kda}}<br>
+LEVEL: {{mainParticipant.stats.champLevel}}<br>
+CS: {{mainParticipant.cs}}<br>
+CS/MIN: {{mainParticipant.csPerMin | number:'1.1-1'}}<br>
+
+<img [src]="mainParticipant.item0Image" class="itemImage"/>
+<img [src]="mainParticipant.item1Image" class="itemImage"/>
+<img [src]="mainParticipant.item2Image" class="itemImage"/>
+<img [src]="mainParticipant.item3Image" class="itemImage"/>
+<img [src]="mainParticipant.item4Image" class="itemImage"/>
+<img [src]="mainParticipant.item5Image" class="itemImage"/>
+<!-- 
 {{match.killSpree}}
-{{match.level}}
-{{match.cs}}
-{{match.csPerMin}}
-<img [src]="match.item1ImageSource" class="itemImage"/>
+
 <img [src]="match.item2ImageSource" class="itemImage"/>
 <img [src]="match.item3ImageSource" class="itemImage"/>
 <img [src]="match.item4ImageSource" class="itemImage"/>
 <img [src]="match.item5ImageSource" class="itemImage"/>
 <img [src]="match.item6ImageSource" class="itemImage"/>
 <img [src]="match.trinketImageSource" class="itemImage"/> -->
+
+
+
+<h3>LIST OF SUMMONERS:</h3><br>
+<div style="float: left;">
+    <div *ngFor="let participant of match.team1Participants">
+        {{participant.participantIdentity.player.summonerName}}:
+        {{participant.champion.name}}
+        <img src="../../../assets/champion/{{participant.champion.image.full}}" class="championSprite"/>
+        <!-- <img src="../../../assets/small.gif"
+            [ngStyle]="participant.spell1Style"
+        />
+        <img src="../../../assets/small.gif"
+            [ngStyle]="participant.spell2Style"
+        /> -->
+    </div>
+</div>
+<img src="../../../assets/positions/top-position-icon.svg"/>
+<img src="../../../assets/positions/jungle-position-icon.svg"/>
+<img src="../../../assets/positions/mid-position-icon.svg"/>
+<img src="../../../assets/positions/bottom-position-icon.svg"/>
+<img src="../../../assets/positions/support-position-icon.svg"/>
+<div style="float: right;">
+    <div *ngFor="let participant of match.team2Participants">
+        {{participant.participantIdentity.player.summonerName}}:
+        {{participant.champion.name}}
+        <img src="../../../assets/champion/{{participant.champion.image.full}}" class="championSprite"/>
+        <!-- <img src="../../../assets/small.gif"
+            [ngStyle]="participant.spell1Style"
+        />
+        <img src="../../../assets/small.gif"
+            [ngStyle]="participant.spell2Style"
+        /> -->
+    </div>
+</div>
