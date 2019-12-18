@@ -9,11 +9,22 @@ import { MatchComponent } from './match/match.component';
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { SecondsToTimePipe } from './seconds-to-time.pipe';
 
+// Material:
+import { MatCardModule, MatGridListModule, MatDividerModule } from '@angular/material';
+
 @NgModule({
-  declarations: [LeagueComponent, UserOverviewComponent, MatchComponent, TimeAgoPipe, SecondsToTimePipe],
+  declarations: [LeagueComponent,
+    UserOverviewComponent,
+    MatchComponent,
+    TimeAgoPipe,
+    SecondsToTimePipe
+  ],
   imports: [
     CommonModule,
     LeagueRoutingModule,
+    MatCardModule,
+    MatGridListModule,
+    MatDividerModule
     // FormsModule
   ]
 })

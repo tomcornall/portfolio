@@ -25,10 +25,18 @@ $portfolio-theme: mat-light-theme($portfolio-primary, $portfolio-accent, $portfo
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($portfolio-theme);
+// @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 /* You can add global styles to this file, and also import other style files */
-body {
+html, body {
     background: #ffe8b4;
+    height: 100%;
+    font-size: 16px;
 }
-html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@media (max-width: 600px) {
+    html, body {
+        font-size: 14px; // 14px: 0.875 * 16px, base font-size under /app/styles.scss
+    }
+}

@@ -1,58 +1,146 @@
 <p>match works!</p>
 
-Type: {{match.type}}<br>
-Timestamp: {{ match.gameCreation | date: 'MMM d' }}<br>   
-Timestamp: {{ match.gameCreation | timeAgo }}<br>   
-{{match.result}}<br>
-{{match.gameDuration | secondsToTime}}<br>
+
+<mat-card class="match-card">
+    <mat-card-content class="match-card-header">
+        <p class="match-card-title">{{ match.type | uppercase }} <span> • {{ match.gameCreation | timeAgo }}</span></p>
+        <p class="match-subheader-2">{{ match.result }}</p>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-content class="match-card-details">
+        <mat-grid-list cols="4" rowHeight="40px" class="match-card-grid-list">
+            <mat-grid-tile colspan="1" rowspan="1" class="main-champion-icons-tile">
+                <div class="left-align-tile-contents">
+                    <div class="height-max">
+                        <img src="../../../assets/champion/{{ mainParticipant.champion.image.full }}" class="main-champion-image"/>
+                    </div>
+                    <div class="summoner-spells">
+                        <img src="../../../assets/small.gif"
+                            [ngStyle]="mainParticipant.spell1Style"
+                            class="summoner-spell-image"
+                        />
+                        <img src="../../../assets/small.gif"
+                            [ngStyle]="mainParticipant.spell2Style"
+                            class="summoner-spell-image"
+                        />
+                    </div>
+                    <div class="runes">
+                        <img [src]="mainParticipant.perk0Image" class="rune-image"/>
+                        <img [src]="mainParticipant.perkSubStyleImage" class="rune-image"/>
+                    </div>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1" rowspan="1">
+                <div class="main-champion-stats">
+                    <div class="kills-deaths-assists">
+                        {{ mainParticipant.stats.kills }} / {{ mainParticipant.stats.deaths }} / {{ mainParticipant.stats.assists }}
+                    </div>
+                    <div style="text-align: center;">
+                        {{ mainParticipant.kda | number:'1.1-1' }} KDA
+                    </div>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1" rowspan="1">
+                <div class="main-champion-stats">
+                    <div class="cs">
+                        {{ mainParticipant.cs }} CS ({{ mainParticipant.csPerMin | number:'1.1-1' }})
+                    </div>
+                    <div class="vision-score">
+                        {{ mainParticipant.stats.visionScore }} <img src="../../../assets/ward.svg" class="ward-svg"/>
+                    </div>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1" rowspan="1">
+                <div>
+                    <div>
+                        {{ mainParticipant.cs }} CS ({{ mainParticipant.csPerMin | number:'1.1-1' }})
+                    </div>
+                    <div>
+                        {{ mainParticipant.stats.visionScore }} wards
+                    </div>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="4" rowspan="2">
+                    
+                <div class="left-align-tile-contents">
+                    <mat-grid-list cols="4" rowHeight="25px" class="item-grid-list">
+                        <!-- TODO: Change to for item in items -->
+                        <mat-grid-tile colspan="1" rowspan="1">
+                            <div class="item-image-container">
+                                <img src="../../../assets/small.gif" class="item-image"
+                                    [ngStyle]="mainParticipant.item0Style"/>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile colspan="1" rowspan="1">
+                            <div class="item-image-container">
+                                <img src="../../../assets/small.gif" class="item-image"
+                                    [ngStyle]="mainParticipant.item1Style"/>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile colspan="1" rowspan="1">
+                            <div class="item-image-container">
+                                <img src="../../../assets/small.gif" class="item-image"
+                                    [ngStyle]="mainParticipant.item2Style"/>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile colspan="1" rowspan="1">
+                            <div class="item-image-container">
+                                <img src="../../../assets/small.gif" class="item-image"
+                                    [ngStyle]="mainParticipant.item6Style"/>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile colspan="1" rowspan="1">
+                            <div class="item-image-container">
+                                <img src="../../../assets/small.gif" class="item-image"
+                                    [ngStyle]="mainParticipant.item3Style"/>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile colspan="1" rowspan="1">
+                            <div class="item-image-container">
+                                <img src="../../../assets/small.gif" class="item-image"
+                                    [ngStyle]="mainParticipant.item4Style"/>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile colspan="1" rowspan="1">
+                            <div class="item-image-container">
+                                <img src="../../../assets/small.gif" class="item-image"
+                                    [ngStyle]="mainParticipant.item5Style"/>
+                            </div>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                </div>
+                
+            </mat-grid-tile>
+        </mat-grid-list>
+        
 
 
-<h3>Main Participant:</h3>
-{{mainParticipant.participantIdentity.player.summonerName}}:
-{{mainParticipant.champion.name}}
-<img src="../../../assets/champion/{{mainParticipant.champion.image.full}}" class="championSprite"/>
-<img src="../../../assets/small.gif"
-    [ngStyle]="mainParticipant.spell1Style"
-/>
-<img src="../../../assets/small.gif"
-    [ngStyle]="mainParticipant.spell2Style"
-/>
+        <!-- {{ mainParticipant.stats.champLevel }} -->
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-content class="match-card-footer">
+        <p class="match-card-title">{{ match.gameCreation | date: 'MMM d' }}</p>
+        <p class="match-subheader-2">{{ match.gameDuration | secondsToTime }}</p>
+    </mat-card-content>
 
-<img [src]="mainParticipant.perk0Image"/>
-<img [src]="mainParticipant.perk1Image"/>
+<!-- {{ mainParticipant.participantIdentity.player.summonerName }}: -->
+<!-- {{ mainParticipant.champion.name }} -->
+
+
+<!-- <img [src]="mainParticipant.perk1Image"/>
 <img [src]="mainParticipant.perk2Image"/>
 <img [src]="mainParticipant.perk3Image"/>
 <img [src]="mainParticipant.perk4Image"/>
-<img [src]="mainParticipant.perk5Image"/>
+<img [src]="mainParticipant.perk5Image"/> -->
 
-<img [src]="mainParticipant.perkSubStyleImage"/>
 
-KILLS/DEATHS/ASSISTS: {{mainParticipant.stats.kills}} / {{mainParticipant.stats.deaths}} / {{mainParticipant.stats.assists}}<br>
-KDA: {{mainParticipant.kda}}<br>
-LEVEL: {{mainParticipant.stats.champLevel}}<br>
-CS: {{mainParticipant.cs}}<br>
-CS/MIN: {{mainParticipant.csPerMin | number:'1.1-1'}}<br>
 
-<img [src]="mainParticipant.item0Image" class="itemImage"/>
-<img [src]="mainParticipant.item1Image" class="itemImage"/>
-<img [src]="mainParticipant.item2Image" class="itemImage"/>
-<img [src]="mainParticipant.item3Image" class="itemImage"/>
-<img [src]="mainParticipant.item4Image" class="itemImage"/>
-<img [src]="mainParticipant.item5Image" class="itemImage"/>
-<img [src]="mainParticipant.item6Image" class="itemImage"/> <!-- Trinket -->
-
-<h3>LIST OF SUMMONERS:</h3><br>
+<!-- <h3>LIST OF SUMMONERS:</h3><br>
 <div style="float: left;">
     <div *ngFor="let participant of match.team1Participants">
-        {{participant.participantIdentity.player.summonerName}}:
-        {{participant.champion.name}}
-        <img src="../../../assets/champion/{{participant.champion.image.full}}" class="championSprite"/>
-        <!-- <img src="../../../assets/small.gif"
-            [ngStyle]="participant.spell1Style"
-        />
-        <img src="../../../assets/small.gif"
-            [ngStyle]="participant.spell2Style"
-        /> -->
+        {{ participant.participantIdentity.player.summonerName }}:
+        {{ participant.champion.name }}
+        <img src="../../../assets/champion/{{ participant.champion.image.full }}" class="champion-sprite"/>
     </div>
 </div>
 <img src="../../../assets/positions/top-position-icon.svg"/>
@@ -62,14 +150,10 @@ CS/MIN: {{mainParticipant.csPerMin | number:'1.1-1'}}<br>
 <img src="../../../assets/positions/support-position-icon.svg"/>
 <div style="float: right;">
     <div *ngFor="let participant of match.team2Participants">
-        {{participant.participantIdentity.player.summonerName}}:
-        {{participant.champion.name}}
-        <img src="../../../assets/champion/{{participant.champion.image.full}}" class="championSprite"/>
-        <!-- <img src="../../../assets/small.gif"
-            [ngStyle]="participant.spell1Style"
-        />
-        <img src="../../../assets/small.gif"
-            [ngStyle]="participant.spell2Style"
-        /> -->
+        {{ participant.participantIdentity.player.summonerName }}:
+        {{ participant.champion.name }}
+        <img src="../../../assets/champion/{{ participant.champion.image.full }}" class="champion-sprite"/>
     </div>
-</div>
+</div> -->
+
+</mat-card>

@@ -9,7 +9,7 @@ export class SecondsToTimePipe implements PipeTransform {
     const hours = Math.floor(seconds / 3600);
     const minutes  = Math.floor(seconds/  60);
     seconds = Math.floor(seconds % 3600 % 60);
-    return (hours? (hours + 'h ') : '') + (minutes? (minutes + 'm ') : '') + seconds + 's';
+    return (hours? (hours + 'h ') : '') + (minutes? (minutes + 'm ') : '');
   }
 
 }

@@ -30,8 +30,6 @@ export class MatchComponent implements OnInit {
     this.leagueApiService.getMatch(this.matchlistMatch.gameId)
       .subscribe(
         match => {
-          console.log('got match: ');
-          console.log(match);
           this.setupMatchData(match);
         }
       );
@@ -50,22 +48,31 @@ export class MatchComponent implements OnInit {
       participant.team = match.teams.find(team => team.teamId === participant.teamId);
       participant.champion = Champions.data.find(champion => champion.key == participant.championId); // using "==" since one is a string while the other number
       participant.mainParticipant = (participant.participantIdentity.player.accountId === this.account.accountId)? true : false;
-      participant.spell1 = SummonerSpells.data[participant.spell1Id];
-      participant.spell2 = SummonerSpells.data[participant.spell2Id];
 
-      participant.spell1Style = {
-        'background': `url('../../../assets/sprite/tiny_${participant.spell1.image.sprite}') -${participant.spell1.image.x / 2}px -${participant.spell1.image.y / 2}px`,
-        'width': `${participant.spell1.image.w / 2}px`,
-        'height': `${participant.spell1.image.h / 2}px`,
-      };
-      participant.spell2Style = {
-        'background': `url('../../../assets/sprite/tiny_${participant.spell2.image.sprite}') -${participant.spell2.image.x / 2}px -${participant.spell2.image.y / 2}px`,
-        'width': `${participant.spell2.image.w / 2}px`,
-        'height': `${participant.spell2.image.h / 2}px`,
-      };
+
+
+      // IMAGES:
+      // TODO: Sprite abstract function
+      for (let index = 1; index <= 2; index++) {
+        participant["spell" + index] = SummonerSpells.data[participant["spell" + index + "Id"]];
+
+        let spriteDiscreteX = 10;
+        let spriteDiscreteY = 4;
+        let incrementX = 100 / (spriteDiscreteX - 1);
+        let incrementY = 100 / (spriteDiscreteY - 1);
+
+        let positionX = participant["spell" + index].image.x / participant["spell" + index].image.w * incrementX;
+        let positionY = participant["spell" + index].image.y / participant["spell" + index].image.h * incrementY;
+
+        participant["spell" + index + "Style"] = {
+          'background': `url('../../../assets/sprite/tiny_${participant["spell" + index].image.sprite}') ${positionX}% ${positionY}%`,
+          'background-size': '1000%'
+        };
+      }
 
       // primaryRunes = Runes.data.find(rune => rune.id === participant.stats.perkPrimaryStyle)
 
+      // TODO: for loop
       participant.perk0Image = 'https://ddragon.leagueoflegends.com/cdn/img/' + Perks.data.find(rune => rune.id === participant.stats.perk0).iconPath;
       participant.perk1Image = 'https://ddragon.leagueoflegends.com/cdn/img/' + Perks.data.find(rune => rune.id === participant.stats.perk1).iconPath;
       participant.perk2Image = 'https://ddragon.leagueoflegends.com/cdn/img/' + Perks.data.find(rune => rune.id === participant.stats.perk2).iconPath;
@@ -81,13 +88,33 @@ export class MatchComponent implements OnInit {
       participant.csPerMin = participant.cs / (match.gameDuration / 60);
 
       // items go up to item6
+      // TODO: Sprite abstract function
       for (let index = 0; index < 7; index++) {
-        console.log(index);
-        let string = participant.stats["item" + index.toString()];
-        if (string) {
-          string = string.toString();
-          // participant.item0Image = '../../../assets/item/' + Items.data[string].image.full;
-          participant["item" + index.toString() + "Image"] = '../../../assets/item/' + Items.data[string].image.full;
+        // let key = index.toString();
+        let itemKey = participant.stats["item" + index];
+
+        if (itemKey) {
+          itemKey = itemKey.toString();
+
+          let spriteDiscreteX = 10;
+          let spriteDiscreteY = 10;
+
+          let spriteFile = Items.data[itemKey].image.sprite;
+
+          if (spriteFile === "item2.png") {
+            spriteDiscreteY = 6;
+          }
+
+          let incrementX = 100 / (spriteDiscreteX - 1);
+          let incrementY = 100 / (spriteDiscreteY - 1);
+
+          let positionX = Items.data[itemKey].image.x / Items.data[itemKey].image.w * incrementX;
+          let positionY = Items.data[itemKey].image.y / Items.data[itemKey].image.h * incrementY;
+
+          participant["item" + index + "Style"] = {
+            'background': `url('../../../assets/sprite/${spriteFile}') ${positionX}% ${positionY}%`,
+            'background-size': '1000%'
+          };
         }
       }
 
