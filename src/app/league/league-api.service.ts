@@ -18,7 +18,7 @@ export class LeagueApiService {
       'Content-Type': 'application/json'
     }),
     params: new HttpParams()
-      .set('token', 'RGAPI-fd86f203-6a7a-4441-a1a1-c8516777ec1b')
+      .set('token', 'RGAPI-7095e39b-ceeb-4115-93d8-cd9b74298669')
   };
 
   constructor(
