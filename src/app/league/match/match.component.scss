@@ -34,6 +34,10 @@
 /* 
  * Main Component Styles
  */
+.match-card-hover {
+    background-color: red;
+}
+
 .match-card {
     font-size: 1em;
     padding: 1em;
@@ -97,7 +101,7 @@
         border-radius: 4px;
         border-width: 1px;
         border-style: solid;
-        border-color: rgb(55, 43, 96);
+        border-color: #316300;
     }
     img:first-of-type {
         margin-bottom: 0.25em;
@@ -129,14 +133,18 @@
 }
 
 .item-grid-list {
-    width: 100px;
+    width: 106px;
     .item-image-container {
-        width: 24px;
-        height: 24px;
+        width: 26px;
+        height: 26px;
         background-color: #d8d8d8;
         border-radius: 4px;
         .item-image {
             width: 24px;
+            border-radius: 4px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: #316300;
         }
     }
 }
