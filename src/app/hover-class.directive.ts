@@ -4,16 +4,24 @@ import { Directive, HostListener, ElementRef, Input } from '@angular/core';
   selector: '[hover-class]'
 })
 export class HoverClassDirective {
-  constructor(public elementRef: ElementRef) { }
-
   @Input('hover-class') hoverClass: any;
 
+  constructor(public elementRef: ElementRef) { }
+
   @HostListener('mouseenter') onMouseEnter() {
-    this.elementRef.nativeElement.classList.add(this.hoverClass);
+    let classArray = this.hoverClass.split(" ");
+
+    classArray.forEach(hoverClass => {
+      this.elementRef.nativeElement.classList.add(hoverClass);
+    });
   }
 
   @HostListener('mouseleave') onMouseLeave() {
-    this.elementRef.nativeElement.classList.remove(this.hoverClass);
+    let classArray = this.hoverClass.split(" ");
+
+    classArray.forEach(hoverClass => {
+      this.elementRef.nativeElement.classList.remove(hoverClass);
+    });
   }
 
 }
