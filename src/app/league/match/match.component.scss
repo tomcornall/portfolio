@@ -36,9 +36,12 @@
  */
 .match-card-hover {
     background-color: red;
+    border: 2px solid transparent;
+    border-image: url('../../../assets/red-border.png') 30 stretch;
 }
 
 .match-card {
+    background: linear-gradient(90deg, rgba(201, 103, 143, 0.5) 0%, rgba(49, 41, 85, 0.5) 100%);
     font-size: 1em;
     padding: 1em;
     margin: 1em;

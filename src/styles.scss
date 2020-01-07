@@ -29,7 +29,8 @@ $portfolio-theme: mat-light-theme($portfolio-primary, $portfolio-accent, $portfo
 
 /* You can add global styles to this file, and also import other style files */
 html, body {
-    background: #ffe8b4;
+    // background: #ffe8b4;
+    background: rgb(27, 18, 61);
     height: 100%;
     font-size: 16px;
 }
