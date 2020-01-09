@@ -1,14 +1,19 @@
-<p>match works!</p>
-
-
 <mat-card class="match-card mat-elevation-z0" hover-class="mat-elevation-z2 match-card-hover">
     <mat-card-content class="match-card-header">
-        <p class="match-card-title">{{ match.type | uppercase }} <span> • {{ match.gameCreation | timeAgo }}</span></p>
-        <p class="match-subheader-2">{{ match.result }}</p>
+        <p class="match-card-title">{{ match.type | uppercase }}
+            <span class="match-time-ago"> • {{ match.gameCreation | timeAgo }}</span>
+        </p>
+        <div class="match-role">
+            <img [src]="mainParticipant.roleIconSource" class="role-icon"/>
+            <p>{{ mainParticipant.timeline.lane }}</p>
+        </div>
     </mat-card-content>
     <mat-divider></mat-divider>
     <mat-card-content class="match-card-details">
-        <mat-grid-list cols="4" rowHeight="40px" class="match-card-grid-list">
+        <mat-grid-list cols="3" rowHeight="54px" class="match-card-grid-list">
+
+            <!-- CHAMPION -->
+
             <mat-grid-tile colspan="1" rowspan="1" class="main-champion-icons-tile">
                 <div class="left-align-tile-contents">
                     <div class="height-max">
@@ -25,14 +30,20 @@
                         />
                     </div>
                     <div class="runes">
-                        <img [src]="mainParticipant.perk0Image" class="rune-image"/>
-                        <img [src]="mainParticipant.perkSubStyleImage" class="rune-image"/>
+                        <img [src]="mainParticipant.perk0Image" class="rune-image-main"/>
+                        <img [src]="mainParticipant.perkSubStyleImage" class="rune-image-secondary"/>
                     </div>
                 </div>
+                <div class="match-kills-deaths-assists">
+                    <p>{{ mainParticipant.stats.kills }} / {{ mainParticipant.stats.deaths }} / {{ mainParticipant.stats.assists }}</p>
+                </div>
             </mat-grid-tile>
+
+            <!-- ITEMS -->
+
             <mat-grid-tile colspan="1" rowspan="1" class="main-champion-items-tile">
                 <div class="left-align-tile-contents">
-                    <mat-grid-list cols="4" rowHeight="26px" class="item-grid-list">
+                    <mat-grid-list cols="4" rowHeight="24px"  class="item-grid-list">
                         <!-- TODO: Change to for item in items -->
                         <mat-grid-tile colspan="1" rowspan="1">
                             <div class="item-image-container">
@@ -52,8 +63,8 @@
                                     [ngStyle]="mainParticipant.item2Style"/>
                             </div>
                         </mat-grid-tile>
-                        <mat-grid-tile colspan="1" rowspan="1">
-                            <div class="item-image-container">
+                        <mat-grid-tile colspan="1" rowspan="1" style="top:12px">
+                            <div class="item-image-container item-trinket">
                                 <img src="../../../assets/small.gif" class="item-image"
                                     [ngStyle]="mainParticipant.item6Style"/>
                             </div>
@@ -81,34 +92,18 @@
             </mat-grid-tile>
             <mat-grid-tile colspan="1" rowspan="1">
                 <div class="main-champion-stats">
-                    <div class="kills-deaths-assists">
-                        {{ mainParticipant.stats.kills }} / {{ mainParticipant.stats.deaths }} / {{ mainParticipant.stats.assists }}
+                    <div class="match-cs">
+                        {{ mainParticipant.cs }} ({{ mainParticipant.csPerMin | number:'1.1-1' }}) <span>CS</span>
                     </div>
-                    <div style="text-align: center;">
-                        {{ mainParticipant.kda | number:'1.1-1' }} KDA
+                    <div class="match-kp">
+                        {{ mainParticipant.kp | number:'1.1-1' }}% <span>KP</span>
                     </div>
-                </div>
-            </mat-grid-tile>
-            <mat-grid-tile colspan="1" rowspan="1">
-                <div class="main-champion-stats">
-                    <div class="cs">
-                        {{ mainParticipant.cs }} CS ({{ mainParticipant.csPerMin | number:'1.1-1' }})
-                    </div>
-                    <div class="vision-score">
-                        {{ mainParticipant.stats.visionScore }} <img src="../../../assets/ward.svg" class="ward-svg"/>
+                    <div class="match-kda">
+                        {{ mainParticipant.kda | number:'1.1-1' }} <span>KDA</span>
                     </div>
                 </div>
             </mat-grid-tile>
-            <mat-grid-tile colspan="1" rowspan="1">
-                <div>
-                    <div>
-                        {{ mainParticipant.cs }} CS ({{ mainParticipant.csPerMin | number:'1.1-1' }})
-                    </div>
-                    <div>
-                        {{ mainParticipant.stats.visionScore }} wards
-                    </div>
-                </div>
-            </mat-grid-tile>
+
         </mat-grid-list>
         
 
@@ -117,7 +112,7 @@
     </mat-card-content>
     <mat-divider></mat-divider>
     <mat-card-content class="match-card-footer">
-        <p class="match-card-title">{{ match.gameCreation | date: 'MMM d' }}</p>
+        <p class="match-card-date">{{ match.gameCreation | date: 'MMM d' }}</p>
         <p class="match-subheader-2">{{ match.gameDuration | secondsToTime }}</p>
     </mat-card-content>
 

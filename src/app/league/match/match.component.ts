@@ -45,15 +45,7 @@ export class MatchComponent implements OnInit {
     match.team2Participants = [];
 
     // Team specific stats have to go first
-    match.participants.forEach(participant => {
-      if (participant.teamId === 100) {
-        match.team1Participants.push(participant);
-        match.team1Kills += participant.stats.kills;
-      } else {
-        match.team2Participants.push(participant);
-        match.team2Kills += participant.stats.kills;
-      }
-    });
+    this.countTeamKills(match);
 
     // Mapping Identities, Teams, and Champions, Summoner Spells to participants
     match.participants.forEach(participant => {
@@ -135,6 +127,24 @@ export class MatchComponent implements OnInit {
         participant.kp = participant.stats.kills / match.team2Kills * 100;
       }
 
+      if (participant.timeline.lane === "BOTTOM") {
+        let otherBottom = match.participants.find(p => p.timeline.lane === "BOTTOM" && participant.participantId !== p.participantId);
+        if (participant.stats.totalMinionsKilled < otherBottom.stats.totalMinionsKilled) {
+          participant.timeline.lane = "SUPPORT";
+        }
+      }
+
+      if (participant.timeline.lane === "MIDDLE") {
+        participant.timeline.lane = "MID";
+      }
+
+      // Setup role icon:
+      if (participant.timeline.lane === "NONE") {
+        participant.roleIconSource = "";
+      } else {
+        participant.roleIconSource = `../../../assets/${participant.timeline.lane}.svg`;
+      }
+
       // done mapping participants. Can assign them now.
       if (participant.mainParticipant === true) {
         this.mainParticipant = participant;
@@ -142,11 +152,41 @@ export class MatchComponent implements OnInit {
       }
     });
 
+    this.groupTeams(match);
+
+    this.match = match;
+  }
+
+  countTeamKills(match: Match) {
+    match.participants.forEach(participant => {
+      if (participant.teamId === 100) {
+        match.team1Kills += participant.stats.kills;
+      } else {
+        match.team2Kills += participant.stats.kills;
+      }
+    });
+  }
+
+  groupTeams(match: Match) {
+    match.participants.forEach(participant => {
+      if (participant.teamId === 100) {
+        match.team1Participants.push(participant);
+      } else {
+        match.team2Participants.push(participant);
+      }
+    });
+
+    this.sortTeams(match.team1Participants);
+    this.sortTeams(match.team2Participants);
+  }
+
+  sortTeams(teamParticipants) {
     const order = {
       "TOP": 1,
       "JUNGLE": 2,
-      "MIDDLE": 3,
-      "BOTTOM": 4
+      "MID": 3,
+      "BOTTOM": 4,
+      "SUPPORT": 5
     };
 
     function compare(a, b) {
@@ -160,7 +200,6 @@ export class MatchComponent implements OnInit {
         return 1;
       }
 
-      // a must be equal to b
       if (a.stats.totalMinionsKilled > b.stats.totalMinionsKilled) {
         return -1;
       } else {
@@ -168,11 +207,6 @@ export class MatchComponent implements OnInit {
       }
     }
 
-    // sort participants...
-    match.team1Participants.sort(compare);
-    match.team2Participants.sort(compare);
-
-    this.match = match;
+    teamParticipants.sort(compare);
   }
-
 }

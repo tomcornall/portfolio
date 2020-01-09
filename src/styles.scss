@@ -32,12 +32,19 @@ html, body {
     // background: #ffe8b4;
     background: rgb(27, 18, 61);
     height: 100%;
-    font-size: 16px;
+    font-size: 12px;
 }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-@media (max-width: 600px) {
+@media (min-width: 370px) {
     html, body {
-        font-size: 14px; // 14px: 0.875 * 16px, base font-size under /app/styles.scss
+        font-size: 14px;
     }
 }
+
+@media (min-width: 600px) {
+    html, body {
+        font-size: 16px;
+    }
+}
+

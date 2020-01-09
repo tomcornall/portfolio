@@ -9,6 +9,17 @@
  * Media Queries (small to large)
  * start with <600
  */
+// @media (max-width: 380px) {
+//     .show-before-380 {
+//         display: none;
+//     }
+// }
+
+// @media (min-width: 380px) {
+//     .hide-after-380 {
+//         display: none;
+//     }
+// }
 // @media (max-width: 600px) {
 
 // }
@@ -43,13 +54,16 @@
 .match-card {
     background: linear-gradient(90deg, rgba(201, 103, 143, 0.5) 0%, rgba(49, 41, 85, 0.5) 100%);
     font-size: 1em;
-    padding: 1em;
+    padding: .75em;
     margin: 1em;
     mat-card-content {
         font-size: 1em;
     }
+    mat-grid-tile {
+        overflow: visible;
+    }
     .match-card-header {
-        margin-bottom: 1em;
+        margin-bottom: .75em;
     }
     p {
         display: inline-block;
@@ -59,17 +73,10 @@
         color: white;
         font-weight: bold;
         letter-spacing: 1px;
-        span {
-            letter-spacing: normal;
-            color: rgb(137, 145, 182);
-            font-size: .875em;
-            opacity: .75;
-            margin-left: .25em;
-        }
     }
     .match-subheader-2 {
         float: right;
-        color: rgb(137, 182, 145);
+        color: #8991b6;
     }
     .match-card-details {
         margin-top: 2em;
@@ -79,6 +86,37 @@
     }
 }
 
+.match-time-ago {
+    letter-spacing: normal;
+    color: rgb(137, 145, 182);
+    font-size: .875em;
+    opacity: .75;
+    margin-left: .25em;
+}
+
+.match-role {
+    font-size: 10px;
+    color: white;
+    background: #160e31ad;
+    display: inline;
+    padding: 5px;
+    border: solid 1px #703E65;
+    border-radius: 4px;
+    float: right;
+    margin-top: -.5em;
+}
+
+.role-icon {
+    width: 10px;
+    height: 10px;
+    display: inline;
+    margin-right: .5em;
+    vertical-align: top;
+}
+
+.match-card-date {
+    color: rgb(137, 145, 182);
+}
 
 .match-card-grid-list {
     line-height: 1.5em;
@@ -100,6 +138,7 @@
 }
 
 .summoner-spells {
+    height: 100%;
     margin-left: 0.25em;
     display: inline-block;
     .summoner-spell-image {
@@ -117,18 +156,48 @@
 }
 
 .runes {
+    height: 100%;
     display: inline-block;
-    .rune-image {
+    .rune-image-main {
         width: 24px;
+        margin-top: -2px;
+    }
+    .rune-image-secondary {
+        width: 14px;
+        margin-left: 7px;
         display: block;
-        border-radius: 4px;
     }
 }
 
+.match-kills-deaths-assists {
+    display: inline;
+    position: absolute;
+    left: 0.75em;
+    bottom: -0.75em;
+    color: white;
+    font-weight: bold;
+}
+
 .main-champion-stats {
+    color: white;
     display: inline-block;
     div {
         display: block;
+    }
+    .match-cs {
+        span {
+            color: rgb(137, 145, 182);
+        }
+    }
+    .match-kp {
+        span {
+            color: rgb(137, 145, 182);
+        }
+    }
+    .match-kda {
+        span {
+            color: rgb(137, 145, 182);
+        }
     }
     .vision-score {
         vertical-align: bottom;
@@ -141,14 +210,20 @@
 }
 
 .item-grid-list {
-    width: 106px;
+    width: 103px;
+    position: absolute;
+    left: -7px;
+    .item-trinket {
+        position: absolute;
+        top: 12px;
+    }
     .item-image-container {
-        width: 26px;
-        height: 26px;
-        background-color: #d8d8d8;
+        width: 24px;
+        height: 24px;
+        background-color: rgba(0, 0, 0, 0.14901960784313725);
         border-radius: 4px;
         .item-image {
-            width: 24px;
+            width: 22px;
             border-radius: 4px;
             border-width: 1px;
             border-style: solid;
@@ -157,3 +232,15 @@
     }
 }
 
+// @media (max-width: 500px) {
+//     .item-grid-list {
+//         width: 106px;
+//         .item-image-container {
+//             width: 26px;
+//             height: 26px;
+//             .item-image {
+//                 width: 24px;
+//             }
+//         }
+//     }
+// }
