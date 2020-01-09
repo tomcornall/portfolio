@@ -30,38 +30,7 @@
                     </div>
                 </div>
             </mat-grid-tile>
-            <mat-grid-tile colspan="1" rowspan="1">
-                <div class="main-champion-stats">
-                    <div class="kills-deaths-assists">
-                        {{ mainParticipant.stats.kills }} / {{ mainParticipant.stats.deaths }} / {{ mainParticipant.stats.assists }}
-                    </div>
-                    <div style="text-align: center;">
-                        {{ mainParticipant.kda | number:'1.1-1' }} KDA
-                    </div>
-                </div>
-            </mat-grid-tile>
-            <mat-grid-tile colspan="1" rowspan="1">
-                <div class="main-champion-stats">
-                    <div class="cs">
-                        {{ mainParticipant.cs }} CS ({{ mainParticipant.csPerMin | number:'1.1-1' }})
-                    </div>
-                    <div class="vision-score">
-                        {{ mainParticipant.stats.visionScore }} <img src="../../../assets/ward.svg" class="ward-svg"/>
-                    </div>
-                </div>
-            </mat-grid-tile>
-            <mat-grid-tile colspan="1" rowspan="1">
-                <div>
-                    <div>
-                        {{ mainParticipant.cs }} CS ({{ mainParticipant.csPerMin | number:'1.1-1' }})
-                    </div>
-                    <div>
-                        {{ mainParticipant.stats.visionScore }} wards
-                    </div>
-                </div>
-            </mat-grid-tile>
-            <mat-grid-tile colspan="4" rowspan="2">
-                    
+            <mat-grid-tile colspan="1" rowspan="1" class="main-champion-items-tile">
                 <div class="left-align-tile-contents">
                     <mat-grid-list cols="4" rowHeight="26px" class="item-grid-list">
                         <!-- TODO: Change to for item in items -->
@@ -109,7 +78,36 @@
                         </mat-grid-tile>
                     </mat-grid-list>
                 </div>
-                
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1" rowspan="1">
+                <div class="main-champion-stats">
+                    <div class="kills-deaths-assists">
+                        {{ mainParticipant.stats.kills }} / {{ mainParticipant.stats.deaths }} / {{ mainParticipant.stats.assists }}
+                    </div>
+                    <div style="text-align: center;">
+                        {{ mainParticipant.kda | number:'1.1-1' }} KDA
+                    </div>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1" rowspan="1">
+                <div class="main-champion-stats">
+                    <div class="cs">
+                        {{ mainParticipant.cs }} CS ({{ mainParticipant.csPerMin | number:'1.1-1' }})
+                    </div>
+                    <div class="vision-score">
+                        {{ mainParticipant.stats.visionScore }} <img src="../../../assets/ward.svg" class="ward-svg"/>
+                    </div>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1" rowspan="1">
+                <div>
+                    <div>
+                        {{ mainParticipant.cs }} CS ({{ mainParticipant.csPerMin | number:'1.1-1' }})
+                    </div>
+                    <div>
+                        {{ mainParticipant.stats.visionScore }} wards
+                    </div>
+                </div>
             </mat-grid-tile>
         </mat-grid-list>
         
