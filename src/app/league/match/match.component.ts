@@ -38,9 +38,22 @@ export class MatchComponent implements OnInit {
   setupMatchData(match: Match) {
     match.type = Queues.data.find(queue => queue.queueId === match.queueId).description;
 
-    // const champion = Champions.data.find(champion => champion.key === championId);
+    // Custom stats:
+    match.team1Kills = 0;
+    match.team2Kills = 0;
     match.team1Participants = [];
     match.team2Participants = [];
+
+    // Team specific stats have to go first
+    match.participants.forEach(participant => {
+      if (participant.teamId === 100) {
+        match.team1Participants.push(participant);
+        match.team1Kills += participant.stats.kills;
+      } else {
+        match.team2Participants.push(participant);
+        match.team2Kills += participant.stats.kills;
+      }
+    });
 
     // Mapping Identities, Teams, and Champions, Summoner Spells to participants
     match.participants.forEach(participant => {
@@ -49,9 +62,7 @@ export class MatchComponent implements OnInit {
       participant.champion = Champions.data.find(champion => champion.key == participant.championId); // using "==" since one is a string while the other number
       participant.mainParticipant = (participant.participantIdentity.player.accountId === this.account.accountId)? true : false;
 
-
-
-      // IMAGES:
+      // Spell Images:
       // TODO: Sprite abstract function
       for (let index = 1; index <= 2; index++) {
         participant["spell" + index] = SummonerSpells.data[participant["spell" + index + "Id"]];
@@ -87,7 +98,7 @@ export class MatchComponent implements OnInit {
       participant.cs = participant.stats.totalMinionsKilled + participant.stats.neutralMinionsKilled;
       participant.csPerMin = participant.cs / (match.gameDuration / 60);
 
-      // items go up to item6
+      // Item images
       // TODO: Sprite abstract function
       for (let index = 0; index < 7; index++) {
         // let key = index.toString();
@@ -118,16 +129,16 @@ export class MatchComponent implements OnInit {
         }
       }
 
+      if (participant.teamId === 100) {
+        participant.kp = participant.stats.kills / match.team1Kills * 100;
+      } else {
+        participant.kp = participant.stats.kills / match.team2Kills * 100;
+      }
+
       // done mapping participants. Can assign them now.
       if (participant.mainParticipant === true) {
         this.mainParticipant = participant;
         match.result = (participant.stats.win) ? 'Victory' : 'Defeat';
-      }
-
-      if (participant.teamId === 100) {
-        match.team1Participants.push(participant);
-      } else {
-        match.team2Participants.push(participant);
       }
     });
 

@@ -16,4 +16,6 @@ export class Match {
     result?: string;
     team1Participants: any[];
     team2Participants: any[];
+    team1Kills: number;
+    team2Kills: number;
 }
