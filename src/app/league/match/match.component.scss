@@ -115,10 +115,11 @@
 }
 
 .match-card-date {
-    color: rgb(137, 145, 182);
+    color: #e2bf00;
 }
 
 .match-card-grid-list {
+    height: 54px;
     line-height: 1.5em;
     font-weight: bold;
 }
@@ -173,7 +174,7 @@
     display: inline;
     position: absolute;
     left: 0.75em;
-    bottom: -0.75em;
+    top: 45px;
     color: white;
     font-weight: bold;
 }
@@ -232,15 +233,23 @@
     }
 }
 
-// @media (max-width: 500px) {
-//     .item-grid-list {
-//         width: 106px;
-//         .item-image-container {
-//             width: 26px;
-//             height: 26px;
-//             .item-image {
-//                 width: 24px;
-//             }
-//         }
-//     }
-// }
+@media (min-width: 400px) {
+    .match-card {
+        padding: 1em;
+    }
+    .match-card-grid-list {
+        height: 71px;
+    }
+    .item-grid-list {
+        width: 151px;
+        left: -25px;
+        top: -3px;
+        .item-image-container {
+            width: 35px;
+            height: 35px;
+            .item-image {
+                width: 33px;
+            }
+        }
+    }
+}
