@@ -129,8 +129,10 @@ export class MatchComponent implements OnInit {
 
       if (participant.timeline.lane === "BOTTOM") {
         let otherBottom = match.participants.find(p => p.timeline.lane === "BOTTOM" && participant.participantId !== p.participantId);
-        if (participant.stats.totalMinionsKilled < otherBottom.stats.totalMinionsKilled) {
-          participant.timeline.lane = "SUPPORT";
+        if (otherBottom) {
+          if (participant.stats.totalMinionsKilled < otherBottom.stats.totalMinionsKilled) {
+            participant.timeline.lane = "SUPPORT";
+          }
         }
       }
 
