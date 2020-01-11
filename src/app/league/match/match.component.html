@@ -10,7 +10,7 @@
     </mat-card-content>
     <mat-divider></mat-divider>
     <mat-card-content class="match-card-details">
-        <mat-grid-list cols="3" rowHeight="fit" class="match-card-grid-list">
+        <mat-grid-list [cols]="matchCardColumns" rowHeight="fit" class="match-card-grid-list">
 
             <!-- CHAMPION -->
 
@@ -106,6 +106,7 @@
                 </div>
             </mat-grid-tile>
 
+            <!-- <mat-grid-tile colspan="1" -->
         </mat-grid-list>
         
 
