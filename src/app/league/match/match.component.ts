@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { LeagueApiService } from '../league-api.service';
 import { MatchlistMatch } from '../matchlist-match';
 import * as Queues from '../../../assets/queues.json';
@@ -21,6 +21,7 @@ export class MatchComponent implements OnInit {
   match: Match;
   mainParticipant: any;
   background: any;
+  matchCardColumns: number;
 
   constructor(
     private leagueApiService: LeagueApiService,
@@ -33,9 +34,25 @@ export class MatchComponent implements OnInit {
           this.setupMatchData(match);
         }
       );
+
+    this.setMatchCardColumns();
   }
 
-  setupMatchData(match: Match) {
+  /**
+   * Window resize listener function
+   */
+  @HostListener('window:resize') private setMatchCardColumns(): void {
+    this.matchCardColumns = (window.innerWidth <= 800) ? 3 : 4;
+  }
+
+  /**
+   * Sets up data used for displaying a match:
+   *   - spell images (url/size)
+   *   - teams 1 and 2 in a sorted order
+   *   - item images
+   *   - various
+   */
+  private setupMatchData(match: Match) {
     match.type = Queues.data.find(queue => queue.queueId === match.queueId).description;
 
     // Custom stats:
@@ -49,13 +66,23 @@ export class MatchComponent implements OnInit {
 
     // Mapping Identities, Teams, and Champions, Summoner Spells to participants
     match.participants.forEach(participant => {
+      // General player stats
       participant.participantIdentity = match.participantIdentities.find(participantIdentity => participantIdentity.participantId === participant.participantId);
       participant.team = match.teams.find(team => team.teamId === participant.teamId);
       participant.champion = Champions.data.find(champion => champion.key == participant.championId); // using "==" since one is a string while the other number
       participant.mainParticipant = (participant.participantIdentity.player.accountId === this.account.accountId)? true : false;
+      participant.kda = (participant.stats.kills + participant.stats.assists) / participant.stats.deaths;
+      participant.cs = participant.stats.totalMinionsKilled + participant.stats.neutralMinionsKilled;
+      participant.csPerMin = participant.cs / (match.gameDuration / 60);
+
+      if (participant.teamId === 100) {
+        participant.kp = participant.stats.kills / match.team1Kills * 100;
+      } else {
+        participant.kp = participant.stats.kills / match.team2Kills * 100;
+      }
 
       // Spell Images:
-      // TODO: Sprite abstract function
+      // TODO: abstract out
       for (let index = 1; index <= 2; index++) {
         participant["spell" + index] = SummonerSpells.data[participant["spell" + index + "Id"]];
 
@@ -73,9 +100,8 @@ export class MatchComponent implements OnInit {
         };
       }
 
-      // primaryRunes = Runes.data.find(rune => rune.id === participant.stats.perkPrimaryStyle)
-
-      // TODO: for loop
+      // Rune Images:
+      // TODO: for loop & abstract out
       participant.perk0Image = 'https://ddragon.leagueoflegends.com/cdn/img/' + Perks.data.find(rune => rune.id === participant.stats.perk0).iconPath;
       participant.perk1Image = 'https://ddragon.leagueoflegends.com/cdn/img/' + Perks.data.find(rune => rune.id === participant.stats.perk1).iconPath;
       participant.perk2Image = 'https://ddragon.leagueoflegends.com/cdn/img/' + Perks.data.find(rune => rune.id === participant.stats.perk2).iconPath;
@@ -83,12 +109,7 @@ export class MatchComponent implements OnInit {
       participant.perk4Image = 'https://ddragon.leagueoflegends.com/cdn/img/' + Perks.data.find(rune => rune.id === participant.stats.perk4).iconPath;
       participant.perk5Image = 'https://ddragon.leagueoflegends.com/cdn/img/' + Perks.data.find(rune => rune.id === participant.stats.perk5).iconPath;
       // participant.perk2Image = 'https://ddragon.leagueoflegends.com/cdn/img/' + Perks.data.find(rune => rune.id === participant.stats.perk2).iconPath;
-
       participant.perkSubStyleImage = 'https://ddragon.leagueoflegends.com/cdn/img/' + Runes.data.find(rune => rune.id === participant.stats.perkSubStyle).icon;
-
-      participant.kda = (participant.stats.kills + participant.stats.assists) / participant.stats.deaths;
-      participant.cs = participant.stats.totalMinionsKilled + participant.stats.neutralMinionsKilled;
-      participant.csPerMin = participant.cs / (match.gameDuration / 60);
 
       // Item images
       // TODO: Sprite abstract function
@@ -121,12 +142,7 @@ export class MatchComponent implements OnInit {
         }
       }
 
-      if (participant.teamId === 100) {
-        participant.kp = participant.stats.kills / match.team1Kills * 100;
-      } else {
-        participant.kp = participant.stats.kills / match.team2Kills * 100;
-      }
-
+      // Player Roles
       if (participant.timeline.lane === "BOTTOM") {
         let otherBottom = match.participants.find(p => p.timeline.lane === "BOTTOM" && participant.participantId !== p.participantId);
         if (otherBottom) {
@@ -140,14 +156,15 @@ export class MatchComponent implements OnInit {
         participant.timeline.lane = "MID";
       }
 
-      // Setup role icon:
+      // Role icon
       if (participant.timeline.lane === "NONE") {
         participant.roleIconSource = "";
       } else {
         participant.roleIconSource = `../../../assets/${participant.timeline.lane}.svg`;
       }
 
-      // done mapping participants. Can assign them now.
+      // Done mapping participants
+      // Assign them now:
       if (participant.mainParticipant === true) {
         this.mainParticipant = participant;
         match.result = (participant.stats.win) ? 'Victory' : 'Defeat';
@@ -159,7 +176,7 @@ export class MatchComponent implements OnInit {
     this.match = match;
   }
 
-  countTeamKills(match: Match) {
+  private countTeamKills(match: Match) {
     match.participants.forEach(participant => {
       if (participant.teamId === 100) {
         match.team1Kills += participant.stats.kills;
@@ -169,7 +186,10 @@ export class MatchComponent implements OnInit {
     });
   }
 
-  groupTeams(match: Match) {
+  /**
+   * Groups participants into Team 1 and Team 2
+   */
+  private groupTeams(match: Match) {
     match.participants.forEach(participant => {
       if (participant.teamId === 100) {
         match.team1Participants.push(participant);
@@ -182,7 +202,10 @@ export class MatchComponent implements OnInit {
     this.sortTeams(match.team2Participants);
   }
 
-  sortTeams(teamParticipants) {
+  /**
+   * Sorts participants in a team into order based on position in the game (top, jungle, etc.)
+   */
+  private sortTeams(teamParticipants) {
     const order = {
       "TOP": 1,
       "JUNGLE": 2,
