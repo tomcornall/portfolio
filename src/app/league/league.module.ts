@@ -12,13 +12,15 @@ import { SharedModule } from '../shared.module';
 
 // Material:
 import { MatCardModule, MatGridListModule, MatDividerModule } from '@angular/material';
+import { DateSuffixPipe } from './date-suffix.pipe';
 
 @NgModule({
   declarations: [LeagueComponent,
     UserOverviewComponent,
     MatchComponent,
     TimeAgoPipe,
-    SecondsToTimePipe
+    SecondsToTimePipe,
+    DateSuffixPipe
   ],
   imports: [
     LeagueRoutingModule,
