@@ -6,13 +6,14 @@ import { UserOverviewComponent } from './user-overview/user-overview.component';
 import { MatchComponent } from './match/match.component';
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { SecondsToTimePipe } from './seconds-to-time.pipe';
+import { DateSuffixPipe } from './date-suffix.pipe';
 
 // Global components/directives shared among modules
 import { SharedModule } from '../shared.module';
 
 // Material:
-import { MatCardModule, MatGridListModule, MatDividerModule } from '@angular/material';
-import { DateSuffixPipe } from './date-suffix.pipe';
+import { MatCardModule, MatGridListModule, MatDividerModule, MatSlideToggleModule, MatToolbarModule } from '@angular/material';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
   declarations: [LeagueComponent,
@@ -20,7 +21,8 @@ import { DateSuffixPipe } from './date-suffix.pipe';
     MatchComponent,
     TimeAgoPipe,
     SecondsToTimePipe,
-    DateSuffixPipe
+    DateSuffixPipe,
+    ToolbarComponent
   ],
   imports: [
     LeagueRoutingModule,
@@ -28,6 +30,8 @@ import { DateSuffixPipe } from './date-suffix.pipe';
     MatCardModule,
     MatGridListModule,
     MatDividerModule,
+    MatSlideToggleModule,
+    MatToolbarModule
   ]
 })
 export class LeagueModule { }
