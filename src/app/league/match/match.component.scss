@@ -27,7 +27,7 @@
 /* 
  * Generic Material Modifier Classes 
  */
-.left-align-tile-contents {
+.center-align-tile-contents {
     width: 100%;
     height: 100%;
     display: flex;
@@ -52,7 +52,9 @@
 }
 
 .match-card {
-    background: linear-gradient(90deg, rgba(201, 103, 143, 0.5) 0%, rgba(49, 41, 85, 0.5) 100%);
+    // background: linear-gradient(90deg, rgba(201, 103, 143, 0.5) 0%, rgba(49, 41, 85, 0.5) 100%);
+    // background: linear-gradient(90deg, rgba(216, 73, 73, 0.5) 0%, rgba(41, 51, 47, 0.5) 100%);
+    background: linear-gradient(90deg, rgba(189, 33, 33, 0.5) 0%, rgba(41, 51, 47, 0.5) 100%);
     font-size: 1em;
     padding: .75em;
     margin: 1em;
@@ -81,9 +83,25 @@
     .match-card-details {
         margin-top: 2em;
     }
+    .match-result {
+        display: none;
+        color: #e2bf00;
+        font-weight: normal;
+        float: right;
+        letter-spacing: 1px;
+    }
     .match-card-footer {
         margin: 2em 0 0 0;
     }
+}
+
+.match-victory {
+    // background: linear-gradient(90deg, rgba(59, 156, 87, 0.5) 0%, rgba(27, 56, 43, 0.5) 100%);
+    background: linear-gradient(90deg, rgba(10, 187, 122, 0.5) 0%, rgba(27, 56, 43, 0.5) 100%);
+}
+
+mat-divider {
+    border-top-color: rgba(255, 255, 255, 0.12);
 }
 
 .match-time-ago {
@@ -94,11 +112,15 @@
     margin-left: .25em;
 }
 
+.match-header-date {
+    display: none;
+}
+
 .match-role {
     font-size: 10px;
     color: white;
     background: #160e31ad;
-    display: inline;
+    display: inline-block;
     padding: 5px;
     border: solid 1px #703E65;
     border-radius: 4px;
@@ -136,6 +158,7 @@
     border-radius: 100%;
     width: 25px;
     height: 25px;
+    margin-right: 8px;
 }
 
 .summoner-spells {
@@ -174,7 +197,7 @@
 .match-kills-deaths-assists {
     display: inline;
     position: absolute;
-    left: 0.75em;
+    left: 0.5em;
     top: 45px;
     color: white;
     font-weight: bold;
@@ -235,6 +258,31 @@
     }
 }
 
+.champion-list-grid-tile {
+    margin-top: 7px;
+}
+
+.champion-grid-list {
+    width: 175px;
+    .team-1-player-name {
+        flex: auto;
+        color: #b1b1b1;
+    }
+    .main-participant {
+        color: #e2bf00;
+    }
+}
+
+.role-icon-grid-list {
+    width: 27px;
+}
+
+@media (max-width: 360px) {
+    .match-role {
+        display: none;
+    }
+}
+
 @media (min-width: 400px) {
     .match-kills-deaths-assists {
         top: 43px;
@@ -261,7 +309,7 @@
     }
 
     .match-card-grid-list {
-        height: 80px;
+        height: 68px;
     }
 
     .item-grid-list {
@@ -308,11 +356,39 @@
 @media (min-width: 600px) {
     .match-card {
         max-width: 560px;
+        .match-result {
+            display: block;
+        }
+    }
+
+    .match-role {
+        float: none;
+        margin-left: 10px;
+    }
+
+    .match-header-date {
+        display: inline;
+    }
+
+    .match-card-footer-divider {
+        display: none;
+    }
+
+    .match-card-footer {
+        display: none;
     }
 }
 
 @media (min-width: 800px) {
-    .champion-list {
-        display: block;
+    .match-card {
+        max-width: 800px;
     }
+
+    .match-card-grid-list {
+        height: 81px;
+    }
+}
+
+.dark-theme {
+    background: pink;
 }
