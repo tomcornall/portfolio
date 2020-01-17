@@ -11,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: ':summonerName',
-    component: UserOverviewComponent
+    component: LeagueComponent
   }
 ];
 
