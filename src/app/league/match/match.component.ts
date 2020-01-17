@@ -9,6 +9,8 @@ import * as Runes from '../../../assets/runesReforged.json';
 import * as Items from '../../../assets/item.json';
 import { Match } from '../match';
 import { Account } from '../account';
+import { ThemeService } from '../theme.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-match',
@@ -30,12 +32,16 @@ export class MatchComponent implements OnInit {
     "../../../assets/positions/bottom-position-icon.svg",
     "../../../assets/positions/support-position-icon.svg"
   ];
+  isDarkTheme: Observable<boolean>;
 
   constructor(
     private leagueApiService: LeagueApiService,
+    private themeService: ThemeService
   ) { }
 
   ngOnInit() {
+    this.isDarkTheme = this.themeService.isDarkTheme;
+
     this.leagueApiService.getMatch(this.matchlistMatch.gameId)
       .subscribe(
         match => {
