@@ -2,7 +2,7 @@ import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { LeagueApiService } from '../league-api.service';
 import { MatchlistMatch } from '../matchlist-match';
 import * as Queues from '../../../assets/queues.json';
-import * as Champions from '../../../assets/champion.json';
+import * as Champions from '../../../assets/champion2.json';
 import * as SummonerSpells from '../../../assets/summoner.json';
 import * as Perks from '../../../assets/perks.json';
 import * as Runes from '../../../assets/runesReforged.json';
@@ -22,6 +22,14 @@ export class MatchComponent implements OnInit {
   mainParticipant: any;
   background: any;
   matchCardColumns: number;
+  showChampions: boolean;
+  positionIcons = [
+    "../../../assets/positions/top-position-icon.svg",
+    "../../../assets/positions/jungle-position-icon.svg",
+    "../../../assets/positions/mid-position-icon.svg",
+    "../../../assets/positions/bottom-position-icon.svg",
+    "../../../assets/positions/support-position-icon.svg"
+  ];
 
   constructor(
     private leagueApiService: LeagueApiService,
@@ -42,7 +50,13 @@ export class MatchComponent implements OnInit {
    * Window resize listener function
    */
   @HostListener('window:resize') private setMatchCardColumns(): void {
-    this.matchCardColumns = (window.innerWidth <= 800) ? 3 : 4;
+    if (window.innerWidth <= 800) {
+      this.showChampions = false;
+      this.matchCardColumns = 3;
+    } else {
+      this.showChampions = true;
+      this.matchCardColumns = 5;
+    }
   }
 
   /**
@@ -79,6 +93,18 @@ export class MatchComponent implements OnInit {
         participant.kp = participant.stats.kills / match.team1Kills * 100;
       } else {
         participant.kp = participant.stats.kills / match.team2Kills * 100;
+      }
+
+      // format summoner name:
+      participant.formattedSummonerName = participant.participantIdentity.player.summonerName;
+      console.log(participant.formattedSummonerName);
+      console.log(participant.formattedSummonerName.length);
+
+      if (participant.formattedSummonerName.length > 12) {
+        participant.formattedSummonerName = participant.formattedSummonerName.slice(0,12);
+        console.log(participant.formattedSummonerName);
+        participant.formattedSummonerName += '...';
+        console.log(participant.formattedSummonerName);
       }
 
       // Spell Images:
