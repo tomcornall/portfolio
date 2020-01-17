@@ -1,0 +1,7 @@
+<p>toolbar works!</p>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <h1>Theme Demo</h1>
+    <mat-slide-toggle [checked]="isDarkTheme | async" (change)="toggleDarkTheme($event.checked)">Dark theme</mat-slide-toggle>
+  </mat-toolbar-row>
+</mat-toolbar>
