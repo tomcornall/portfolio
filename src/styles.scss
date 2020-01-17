@@ -12,8 +12,8 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$portfolio-primary: mat-palette($mat-indigo);
-$portfolio-accent: mat-palette($mat-pink, A200, A100, A400);
+$portfolio-primary: mat-palette($mat-grey, 900, 700, black);
+$portfolio-accent: mat-palette($mat-amber, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $portfolio-warn: mat-palette($mat-red);
@@ -25,7 +25,6 @@ $portfolio-theme: mat-light-theme($portfolio-primary, $portfolio-accent, $portfo
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($portfolio-theme);
-// @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 /* You can add global styles to this file, and also import other style files */
 html, body {
@@ -42,3 +41,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     }
 }
 
+.light-theme {
+    background: white;
+}
