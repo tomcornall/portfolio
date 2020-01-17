@@ -8,18 +8,18 @@ import { Observable } from 'rxjs';
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent implements OnInit {
-  isDarkTheme: Observable<boolean>;
+  isLightTheme: Observable<boolean>;
 
   constructor(
     private themeService: ThemeService
   ) { }
 
   ngOnInit() {
-    this.isDarkTheme = this.themeService.isDarkTheme;
+    this.isLightTheme = this.themeService.isLightTheme;
   }
 
-  toggleDarkTheme(checked: boolean) {
-    this.themeService.setDarkTheme(checked);
+  toggleLightTheme(checked: boolean) {
+    this.themeService.setLightTheme(checked);
   }
 
 }

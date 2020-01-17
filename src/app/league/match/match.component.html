@@ -1,4 +1,4 @@
-<mat-card class="match-card mat-elevation-z0" hover-class="mat-elevation-z2 match-card-hover" [ngClass]="{'match-victory': mainParticipant.stats.win, 'dark-theme': isDarkTheme | async}">
+<mat-card class="match-card mat-elevation-z0" hover-class="mat-elevation-z2 match-card-hover" [ngClass]="{'match-victory': mainParticipant.stats.win, 'light-theme': isLightTheme | async}">
     <mat-card-content class="match-card-header">
         <p class="match-card-title">{{ match.type | uppercase }}
             <span class="match-time-ago"> •&nbsp;&nbsp;{{ match.gameCreation | timeAgo }}

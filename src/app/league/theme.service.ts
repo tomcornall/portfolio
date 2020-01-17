@@ -5,12 +5,12 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class ThemeService {
-  private darkTheme = new Subject<boolean>();
-  isDarkTheme = this.darkTheme.asObservable();
+  private lightTheme = new Subject<boolean>();
+  isLightTheme = this.lightTheme.asObservable();
 
   constructor() { }
 
-  setDarkTheme(isDarkTheme: boolean): void {
-    this.darkTheme.next(isDarkTheme);
+  setLightTheme(isLightTheme: boolean): void {
+    this.lightTheme.next(isLightTheme);
   }
 }

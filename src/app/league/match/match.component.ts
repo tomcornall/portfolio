@@ -32,7 +32,7 @@ export class MatchComponent implements OnInit {
     "../../../assets/positions/bottom-position-icon.svg",
     "../../../assets/positions/support-position-icon.svg"
   ];
-  isDarkTheme: Observable<boolean>;
+  isLightTheme: Observable<boolean>;
 
   constructor(
     private leagueApiService: LeagueApiService,
@@ -40,7 +40,7 @@ export class MatchComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.isDarkTheme = this.themeService.isDarkTheme;
+    this.isLightTheme = this.themeService.isLightTheme;
 
     this.leagueApiService.getMatch(this.matchlistMatch.gameId)
       .subscribe(
