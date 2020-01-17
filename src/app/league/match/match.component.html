@@ -1,12 +1,17 @@
-<mat-card class="match-card mat-elevation-z0" hover-class="mat-elevation-z2 match-card-hover">
+<mat-card class="match-card mat-elevation-z0" hover-class="mat-elevation-z2 match-card-hover" [ngClass]="{'match-victory': mainParticipant.stats.win}">
     <mat-card-content class="match-card-header">
         <p class="match-card-title">{{ match.type | uppercase }}
-            <span class="match-time-ago"> • {{ match.gameCreation | timeAgo }}</span>
+            <span class="match-time-ago"> •&nbsp;&nbsp;{{ match.gameCreation | timeAgo }}
+                <span class="match-header-date">&nbsp;&nbsp;•&nbsp;&nbsp;{{ match.gameCreation | date: 'MMM d' }}{{ match.gameCreation | date: 'd' | dateSuffix }}</span>
+            </span>
         </p>
         <div class="match-role">
             <img [src]="mainParticipant.roleIconSource" class="role-icon"/>
             <p>{{ mainParticipant.timeline.lane }}</p>
         </div>
+        <p class="match-result">
+            {{ match.result }}
+        </p>
     </mat-card-content>
     <mat-divider></mat-divider>
     <mat-card-content class="match-card-details">
@@ -15,7 +20,7 @@
             <!-- CHAMPION -->
 
             <mat-grid-tile colspan="1" rowspan="1" class="main-champion-icons-tile">
-                <div class="left-align-tile-contents">
+                <div class="center-align-tile-contents">
                     <div class="height-max">
                         <img src="../../../assets/champion/{{ mainParticipant.champion.image.full }}" class="main-champion-image"/>
                     </div>
@@ -42,7 +47,7 @@
             <!-- ITEMS -->
 
             <mat-grid-tile colspan="1" rowspan="1" class="main-champion-items-tile">
-                <div class="left-align-tile-contents">
+                <div class="center-align-tile-contents">
                     <mat-grid-list cols="4" class="item-grid-list">
                         <!-- TODO: Change to for item in items -->
                         <mat-grid-tile colspan="1" rowspan="1">
@@ -92,6 +97,7 @@
             </mat-grid-tile>
 
             <!-- STATS (CS, KP, KDA) -->
+
             <mat-grid-tile colspan="1" rowspan="1">
                 <div class="main-champion-stats">
                     <div class="match-cs">
@@ -106,16 +112,46 @@
                 </div>
             </mat-grid-tile>
 
-            <!-- <mat-grid-tile colspan="1" -->
+            <!-- CHAMP LIST -->
+
+            <mat-grid-tile colspan="2" rowspan="1" *ngIf="showChampions" class="champion-list-grid-tile">
+                <div class="center-align-tile-contents">
+                    <mat-grid-list cols="1" rowHeight="20px" class="champion-grid-list">
+                        <mat-grid-tile *ngFor="let participant of match.team1Participants" colspan="1" rowspan="1">
+                            <div class="center-align-tile-contents">
+                                <p class="team-1-player-name" [ngClass]="{'main-participant': participant.mainParticipant}">{{ participant.formattedSummonerName }}</p>
+                                <img src="../../../assets/champion/{{ participant.champion.image.full }}" class="champion-sprite"/>
+                                <!-- <p>{{ participant.champion.name }}</p> -->
+                            </div>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                    <mat-grid-list cols="1" rowHeight="20px" class="role-icon-grid-list">
+                        <mat-grid-tile *ngFor="let positionIcon of positionIcons" colspan="1" rowspan="1">
+                            <div class="center-align-tile-contents">
+                                <img [src]="positionIcon"/>
+                            </div>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                    <mat-grid-list cols="1" rowHeight="20px" class="champion-grid-list">
+                        <mat-grid-tile *ngFor="let participant of match.team2Participants" colspan="1" rowspan="1">
+                            <div class="center-align-tile-contents">
+                                <img src="../../../assets/champion/{{ participant.champion.image.full }}" class="champion-sprite"/>
+                                <p class="team-1-player-name" [ngClass]="{'main-participant': participant.mainParticipant}">{{ participant.formattedSummonerName }}</p>
+                                <!-- <p>{{ participant.champion.name }}</p> -->
+                            </div>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                </div>
+            </mat-grid-tile>
         </mat-grid-list>
         
 
 
         <!-- {{ mainParticipant.stats.champLevel }} -->
     </mat-card-content>
-    <mat-divider></mat-divider>
+    <mat-divider class="match-card-footer-divider"></mat-divider>
     <mat-card-content class="match-card-footer">
-        <p class="match-card-date">{{ match.gameCreation | date: 'MMM d' }}</p>
+        <p class="match-card-date">{{ match.gameCreation | date: 'MMM d' }}{{ match.gameCreation | date: 'd' | dateSuffix }}</p>
         <p class="match-subheader-2">{{ match.gameDuration | secondsToTime }}</p>
     </mat-card-content>
 
