@@ -55,6 +55,7 @@
     // background: linear-gradient(90deg, rgba(201, 103, 143, 0.5) 0%, rgba(49, 41, 85, 0.5) 100%);
     // background: linear-gradient(90deg, rgba(216, 73, 73, 0.5) 0%, rgba(41, 51, 47, 0.5) 100%);
     background: linear-gradient(90deg, rgba(189, 33, 33, 0.5) 0%, rgba(41, 51, 47, 0.5) 100%);
+    // border: 1px solid #ffd40054;
     font-size: 1em;
     padding: .75em;
     margin: 1em;
@@ -264,7 +265,7 @@ mat-divider {
 
 .champion-grid-list {
     width: 175px;
-    .team-1-player-name {
+    .team-player-name {
         flex: auto;
         color: #b1b1b1;
     }
@@ -389,6 +390,66 @@ mat-divider {
     }
 }
 
-.light-theme {
-    background: pink;
+/*
+ * LIGHT THEME
+ */
+.light-theme { // Added to mat-card
+    background: linear-gradient(90deg, #ff9289 0%, #f7dbd9 100%);
+
+    &.match-victory {
+        background: linear-gradient(90deg, rgb(151, 214, 255) 0%, rgb(215, 242, 255) 100%);
+    }
+
+    .match-card-title {
+        color: #444444;
+    }
+
+    .match-time-ago {
+        color: #3f414c;
+    }
+
+    .match-result {
+        color: #383838;
+    }
+
+    .match-kills-deaths-assists {
+        color: #464646;
+    }
+
+    .main-champion-stats {
+        color: #464646;
+
+        .match-cs {
+            span {
+                color: #556198;
+            }
+        }
+        .match-kp {
+            span {
+                color: #556198;
+            }
+        }
+        .match-kda {
+            span {
+                color: #556198;
+            }
+        }
+    }
+
+    .champion-grid-list {
+        .team-player-name {
+            color: #464646;
+        }
+        .main-participant {
+            color: #1760ad;
+        }
+    }
+
+    .role-icon-grid-list {
+        filter: invert(1);
+    }
+
+    .match-card-date {
+        color: #464646;
+    }
 }
