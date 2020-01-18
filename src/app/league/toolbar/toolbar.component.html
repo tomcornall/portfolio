@@ -1,7 +1,7 @@
 <p>toolbar works!</p>
-<mat-toolbar color="primary">
+<mat-toolbar class="league-toolbar" color="primary">
   <mat-toolbar-row>
-    <h1>Theme Demo</h1>
-    <mat-slide-toggle [checked]="isLightTheme | async" (change)="toggleLightTheme($event.checked)">Light theme</mat-slide-toggle>
+    <p>Theme Demo</p>
+    <mat-slide-toggle class="league-theme-toggle" [checked]="isLightTheme | async" (change)="toggleLightTheme($event.checked)">Light theme</mat-slide-toggle>
   </mat-toolbar-row>
 </mat-toolbar>
