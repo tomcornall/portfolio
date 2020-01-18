@@ -14,6 +14,7 @@ import { SharedModule } from '../shared.module';
 // Material:
 import { MatCardModule, MatGridListModule, MatDividerModule, MatSlideToggleModule, MatToolbarModule } from '@angular/material';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { RankedInfoCardComponent } from './ranked-info-card/ranked-info-card.component';
 
 @NgModule({
   declarations: [LeagueComponent,
@@ -22,7 +23,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     TimeAgoPipe,
     SecondsToTimePipe,
     DateSuffixPipe,
-    ToolbarComponent
+    ToolbarComponent,
+    RankedInfoCardComponent
   ],
   imports: [
     LeagueRoutingModule,
