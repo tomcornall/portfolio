@@ -29,7 +29,7 @@ $portfolio-theme: mat-light-theme($portfolio-primary, $portfolio-accent, $portfo
 /* You can add global styles to this file, and also import other style files */
 html, body {
     // background: #ffe8b4;
-    background: rgb(27, 18, 61);
+    // background: rgb(27, 18, 61);
     height: 100%;
     font-size: 12px;
 }
@@ -41,6 +41,31 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     }
 }
 
-.light-theme {
-    background: white;
+/*
+ * Overriding Material Styles
+ * "Add the overriding style to your global stylesheet. Scope the selectors so that it only affects the specific elements you need it to."
+ * @see https://material.angular.io/guide/customizing-component-styles
+ */
+.league-theme-toggle {
+    padding: 3px 6px 3px 5px;
+    border-radius: 7px;
+    background: #313131;
+    font-size: 14px;
+    .mat-slide-toggle-bar {
+        height: 10px;
+        width: 22px;
+        .mat-slide-toggle-thumb-container {
+            height: 14px;
+            width: 14px;
+            margin-top: 1px;
+            .mat-slide-toggle-thumb {
+                height: 14px;
+                width: 14px;
+            }
+        }
+    }
+    &.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb-container {
+        transform: translate3d(12px,0,0);
+    }
 }
+
