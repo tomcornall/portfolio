@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { ThemeService } from './theme.service';
 
 @Component({
   selector: 'app-league',
@@ -8,9 +10,11 @@ import { Router } from '@angular/router';
 })
 export class LeagueComponent implements OnInit {
   submitted = false;
+  isLightTheme: Observable<boolean>;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private themeService: ThemeService
   ) { }
 
   onSubmit(nameInput: string) {
@@ -20,6 +24,7 @@ export class LeagueComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLightTheme = this.themeService.isLightTheme;
   }
 
 }
