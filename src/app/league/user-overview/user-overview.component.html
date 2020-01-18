@@ -1,89 +1,112 @@
-<p>user-overview works!</p>
-<h3>Common picks:</h3>
-<a routerLink="/league/KingOfTryndamere">go to KingOfTryndamere~~~!</a>
-<br>
-<a routerLink="/league/tugatom">go to tugatom~~~!</a>
+<div [ngClass]="{'light-theme': isLightTheme | async}">
 
-<div>
-    <h1>Summoner Form</h1>
-      <div>
-        <label for="nameInput">Summoner Name</label>
-        <input type="text" id="nameInput" #nameInput required>
-      </div>
+    <p>user-overview works!</p>
+    <h3>Common picks:</h3>
+    <a routerLink="/league/KingOfTryndamere">go to KingOfTryndamere~~~!</a>
+    <br>
+    <a routerLink="/league/tugatom">go to tugatom~~~!</a>
 
-      <button (click)="onSubmit(nameInput.value)">Submit</button>
-</div>
+    <div>
+        <h1>Summoner Form</h1>
+        <div>
+            <label for="nameInput">Summoner Name</label>
+            <input type="text" id="nameInput" #nameInput required>
+        </div>
 
-<div *ngIf="account else noAccount">
-    <h4>{{account.name}}</h4>
-    <img [src]="profileIconSource" class="profileImage"/>
-</div>
-
-<ng-template #noAccount>
-    <h4>Summoner not found!</h4>
-    <img [src]="defaultProfileIconSource" class="profileImage"/>
-</ng-template>
-
-<h3>Rank</h3>
-<div>
-    Ranked Solo Queue {{rankedSoloQueue.leagueId}}
-    <div *ngIf="rankedSoloQueue else soloQueueEmpty">
-        <img [src]="rankedSoloQueue.emblemImageSource" class="rankedEmblemImage"/>
-        {{rankedSoloQueue.tier | titlecase}} {{rankedSoloQueue.rank}}
-        {{rankedSoloQueue.leaguePoints}} LP / {{rankedSoloQueue.wins}}W {{rankedSoloQueue.losses}}L / {{rankedSoloQueue.winrate | number:'1.0-0'}}%
+        <button (click)="onSubmit(nameInput.value)">Submit</button>
     </div>
-    <ng-template #soloQueueEmpty>
-        Unranked
-    </ng-template>
-</div>
-<div>
-    Ranked Flex Queue
-    <div *ngIf="rankedFlexSR else flexTTEmpty">
-        <img [src]="rankedFlexSR.emblemImageSource" class="rankedEmblemImage"/>
-        {{rankedFlexSR.tier | titlecase}} {{rankedFlexSR.rank}}
-        {{rankedFlexSR.leaguePoints}} LP / {{rankedFlexSR.wins}}W {{rankedFlexSR.losses}}L / {{rankedFlexSR.winrate | number:'1.0-0'}}%
+
+    <div *ngIf="account else noAccount">
+        <h4>{{account.name}}</h4>
+        <div class="profile-image-wrapper">
+            <img [src]="profileIconSource" class="profile-image"/>
+            <img [src]="prestigeCrestSource" class="profile-crest"/>
+            <h2 class="account-level">{{account.summonerLevel}}</h2>
+        </div>
     </div>
-    <ng-template #flexTTEmpty>
-        Unranked
+
+    <ng-template #noAccount>
+        <h4>Summoner not found!</h4>
+        <img [src]="defaultProfileIconSource" class="profile-image"/>
+        <img [src]="defaultPrestigeCrestSource" class="profile-image"/>
     </ng-template>
-</div>
-<div>
-    Flex Queue Twisted Treeline
-    <div *ngIf="rankedFlexTT else flexTTEmpty">
-        <img [src]="rankedFlexTT.emblemImageSource" class="rankedEmblemImage"/>
-        {{rankedFlexTT.tier | titlecase}} {{rankedFlexTT.rank}}
-        {{rankedFlexTT.leaguePoints}} LP / {{rankedFlexTT.wins}}W {{rankedFlexTT.losses}}L / {{rankedFlexTT.winrate | number:'1.0-0'}}%
+
+    <mat-card class="ranked-info-card mat-elevation-z0">
+        <mat-card-content>
+            <img [src]="rankedSoloQueue.emblemImageSource" class="ranked-emblem-image"/>
+            <div class="ranked-info-tier">
+                <h2>{{rankedSoloQueue.cardName}}<br>
+                    <span class="rank-number">{{rankedSoloQueue.tier | titlecase}} {{rankedSoloQueue.rank}}</span>
+                </h2>
+            </div>
+            <div class="ranked-info-points-wrapper">
+                <p>{{rankedSoloQueue.leaguePoints}} LP</p>
+                <p>{{rankedSoloQueue.wins}}W {{rankedSoloQueue.losses}}L</p>
+                <p><span [ngClass]="{'bad-winrate': rankedSoloQueue.badWinrate}">{{rankedSoloQueue.winrate | number:'1.0-0'}}%</span> W.R.</p>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+    <h3>Rank</h3>
+    <div>
+        Ranked Solo Queue {{rankedSoloQueue.leagueId}}
+        <div *ngIf="rankedSoloQueue else soloQueueEmpty">
+            <img [src]="rankedSoloQueue.emblemImageSource" class="ranked-emblem-image"/>
+            {{rankedSoloQueue.tier | titlecase}} {{rankedSoloQueue.rank}}
+            {{rankedSoloQueue.leaguePoints}} LP / {{rankedSoloQueue.wins}}W {{rankedSoloQueue.losses}}L / {{rankedSoloQueue.winrate | number:'1.0-0'}}%
+        </div>
+        <ng-template #soloQueueEmpty>
+            Unranked
+        </ng-template>
     </div>
-    <ng-template #flexTTEmpty>
-        Unranked
-    </ng-template>
+    <div>
+        Ranked Flex Queue
+        <div *ngIf="rankedFlexSR else flexTTEmpty">
+            <img [src]="rankedFlexSR.emblemImageSource" class="ranked-emblem-image"/>
+            {{rankedFlexSR.tier | titlecase}} {{rankedFlexSR.rank}}
+            {{rankedFlexSR.leaguePoints}} LP / {{rankedFlexSR.wins}}W {{rankedFlexSR.losses}}L / {{rankedFlexSR.winrate | number:'1.0-0'}}%
+        </div>
+        <ng-template #flexTTEmpty>
+            Unranked
+        </ng-template>
+    </div>
+    <div>
+        Flex Queue Twisted Treeline
+        <div *ngIf="rankedFlexTT else flexTTEmpty">
+            <img [src]="rankedFlexTT.emblemImageSource" class="ranked-emblem-image"/>
+            {{rankedFlexTT.tier | titlecase}} {{rankedFlexTT.rank}}
+            {{rankedFlexTT.leaguePoints}} LP / {{rankedFlexTT.wins}}W {{rankedFlexTT.losses}}L / {{rankedFlexTT.winrate | number:'1.0-0'}}%
+        </div>
+        <ng-template #flexTTEmpty>
+            Unranked
+        </ng-template>
+    </div>
+
+    <!-- <h3>Most Played: Ranked Solo Queue</h3>
+    <div *ngFor="mostPlayedChampions as champion">
+        <img [src]="champion.imageSource" class="champion.imageSource"/>
+        {{champion.name}}
+        {{champion.averageCS}}
+        {{champion.KDA}}
+        {{champion.averageKills}}
+        {{champion.averageDeaths}}
+        {{champion.averageAssists}}
+        {{champion.winrate}}
+        {{champion.gamesPlayed}}
+    </div> -->
+
+    <h3>Match History</h3>
+    <div *ngFor="let match of matchlistMatches">
+        <app-match [matchlistMatch]="match" [account]="account"></app-match>
+    </div>
+
+    <h4>Account Data</h4>
+    profileIconId: {{account.profileIconId}}<br>
+    name: {{account.name}}<br>
+    puuid: {{account.puuid}}<br>
+    summonerLevel: {{account.summonerLevel}}<br>
+    accountId: {{account.accountId}}<br>
+    id: {{account.id}}<br>
+    revisionDate: {{account.revisionDate}}<br>
+
 </div>
-
-<!-- <h3>Most Played: Ranked Solo Queue</h3>
-<div *ngFor="mostPlayedChampions as champion">
-    <img [src]="champion.imageSource" class="champion.imageSource"/>
-    {{champion.name}}
-    {{champion.averageCS}}
-    {{champion.KDA}}
-    {{champion.averageKills}}
-    {{champion.averageDeaths}}
-    {{champion.averageAssists}}
-    {{champion.winrate}}
-    {{champion.gamesPlayed}}
-</div> -->
-
-<h3>Match History</h3>
-<div *ngFor="let match of matchlistMatches">
-    <app-match [matchlistMatch]="match" [account]="account"></app-match>
-</div>
-
-<h4>Account Data</h4>
-profileIconId: {{account.profileIconId}}<br>
-name: {{account.name}}<br>
-puuid: {{account.puuid}}<br>
-summonerLevel: {{account.summonerLevel}}<br>
-accountId: {{account.accountId}}<br>
-id: {{account.id}}<br>
-revisionDate: {{account.revisionDate}}<br>
-
-
