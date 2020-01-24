@@ -16,8 +16,11 @@ import { Observable } from 'rxjs';
 })
 export class UserOverviewComponent implements OnInit {
   rankedSoloQueue: RankedEntry;
+  rankedSoloQueueCardName: string = "Ranked Solo";
   rankedFlexSR: RankedEntry;
+  rankedFlexSRCardName: string = "Flex 5v5";
   rankedFlexTT: RankedEntry;
+  rankedFlexTTCardName: string = "Flex 3v3";
   account: Account;
   profileIconSource: string;
   defaultProfileIconSource: string;
@@ -95,18 +98,12 @@ export class UserOverviewComponent implements OnInit {
             switch (entry.queueType) {
               case "RANKED_SOLO_5x5":
                 this.rankedSoloQueue = entry;
-                this.rankedSoloQueue.cardName = "Ranked Solo";
-                this.setupRankedData(this.rankedSoloQueue);
                 break;
               case "RANKED_FLEX_SR":
                 this.rankedFlexSR = entry;
-                this.rankedFlexSR.cardName = "Flex 5v5";
-                this.setupRankedData(this.rankedFlexSR);
                 break;
               case "RANKED_FLEX_TT":
                 this.rankedFlexTT = entry;
-                this.rankedFlexTT.cardName = "Flex 3v3";
-                this.setupRankedData(this.rankedFlexTT);
                 break;
               default:
                 // nothing to do
@@ -115,20 +112,6 @@ export class UserOverviewComponent implements OnInit {
           });
         }
       );
-  }
-
-  setupRankedData(entry: RankedEntry) {
-    entry.emblemImageSource = `/assets/ranked-emblems/Emblem_${entry.tier}.png`;
-
-    if (entry.losses) {
-      entry.winrate = entry.wins / (entry.wins + entry.losses) * 100;
-    } else {
-      entry.winrate = 100;
-    }
-
-    if (entry.winrate < 50) {
-      entry.badWinrate = true;
-    }
   }
 
   setupProfileIcon(profileIconId: number, summonerLevel: number) {
