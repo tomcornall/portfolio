@@ -1,0 +1,59 @@
+.ranked-info-card {
+    max-width: 250px;
+    font-family: Helvetica;
+    color: white;
+    margin: 1em;
+    border: 1px solid #525252;
+    background: #212121;
+
+    &.light-theme {
+        color: #444444;
+        border: 1px solid #d6d6d6;
+        background: white;
+    }
+
+    mat-card-content {
+        display: flex;
+        align-items: center;
+    }
+
+    .ranked-emblem-image {
+        width: 55px;
+        height: 55px;
+    }
+
+    .ranked-info-tier {
+        display: inline-block;
+        margin-left: 10px;
+
+        h2 {
+            display: inline-block;
+            font-size: 18px;
+            line-height: 22px;
+            margin: 0px;
+
+            .rank-number {
+                color: #3587E5;
+            }
+
+            .unranked-number {
+                color: #999999;
+            }
+        }
+    }
+
+    .ranked-info-points-wrapper {
+        font-weight: bold;
+        display: inline-block;
+        margin-left: 16px;
+
+        p {
+            font-size: 12px;
+            line-height: 8px;
+
+            .bad-winrate {
+                color: red;
+            }
+        }
+    }
+}
