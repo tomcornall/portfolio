@@ -12,6 +12,8 @@ export class RankedEntry {
     inactive: boolean;
     freshBlood: boolean;
     hotStreak: boolean;
+    cardName?: string;
     winrate?: number;
     emblemImageSource?: string;
+    badWinrate?: boolean;
 }
