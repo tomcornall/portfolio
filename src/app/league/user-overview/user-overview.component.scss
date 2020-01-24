@@ -1,9 +1,53 @@
-.rankedEmblemImage {
-    width: 100px;
-    height: 100px;
+.profile-image-wrapper {
+    position: relative;
+
+    .profile-image {
+        width: 120px;
+        height: 120px;
+        margin-left: calc(50% - 60px);
+        margin-top: 6px;
+        border-radius: 50%;
+    }
+
+    .profile-crest {
+        position: absolute;
+        top: calc(50% - 135px);
+        left: calc(50% - 135px);
+        height: 270px;
+        width: 270px;
+    }
+
+    .account-level {
+        position: absolute;
+        top: calc(100% - 20px);
+        left: calc(50% - 13px);
+        color: gold;
+        font-weight: 400;
+        font-size: 16px;
+    }
 }
 
-.profileImage {
-    width: 100px;
-    height: 100px;
+.summoner-name {
+    text-align: center;
+    margin-top: 52px;
+}
+
+.match-history-title-card {
+    color: white;
+    border: 1px solid #525252;
+    background: #212121;
+    max-width: 250px;
+    font-family: Helvetica;
+    margin: 1em;
+
+    h2 {
+        font-size: 18px;
+        text-align: center;
+        width: 100%;
+    }
+
+    mat-card-content {
+        display: flex;
+        align-items: center;
+    }
 }
