@@ -396,6 +396,10 @@ mat-divider {
 .light-theme { // Added to mat-card
     background: linear-gradient(90deg, #ff9289 0%, #f7dbd9 100%);
 
+    mat-divider {
+        border-top-color: rgba(0, 0, 0, 0.12);
+    }
+
     &.match-victory {
         background: linear-gradient(90deg, rgb(151, 214, 255) 0%, rgb(215, 242, 255) 100%);
     }
