@@ -10,3 +10,23 @@ h1 {
 :host(.light-theme) {
     background: white;
 }
+
+.main-header {
+    background: #313131;
+    height: 60px;
+    text-align: center;
+
+    button {
+        margin: .5em;
+        background: none;
+        border: none;
+        font-size: 18px;
+        font-weight: bold;
+        font-family: Helvetica;
+        color: white;
+
+        &.league-button {
+            margin: 1em;
+        }
+    }
+}
