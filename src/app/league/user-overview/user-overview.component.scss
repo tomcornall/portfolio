@@ -10,6 +10,7 @@
     }
 
     .profile-crest {
+        pointer-events: none; // these crest images are huge!
         position: absolute;
         top: calc(50% - 135px);
         left: calc(50% - 135px);
@@ -20,26 +21,22 @@
     .account-level {
         position: absolute;
         top: calc(100% - 20px);
-        left: calc(50% - 13px);
+        left: 0;
+        width: 100%;
+        text-align: center;
         color: gold;
-        font-weight: 400;
+        font-weight: bold;
         font-size: 16px;
     }
 }
 
 .summoner-name {
+    color: white;
     text-align: center;
     margin-top: 52px;
 }
 
 .match-history-title-card {
-    color: white;
-    border: 1px solid #525252;
-    background: #212121;
-    max-width: 250px;
-    font-family: Helvetica;
-    margin: 1em;
-
     h2 {
         font-size: 18px;
         text-align: center;
@@ -49,5 +46,61 @@
     mat-card-content {
         display: flex;
         align-items: center;
+    }
+}
+
+.light-theme {
+    .summoner-name {
+        color: #444444;
+    }
+}
+
+.search-card {
+    box-shadow: none;
+    margin: 1em;
+    max-width: 281px;
+    padding: 0;
+    font-family: helvetica;
+    font-weight: bold;
+    color: #B1B1B1;
+    border-radius: 9px;
+    background: #D8D8D8;
+
+    .na-wrap {
+        display: inline-block;
+        padding: 9px;
+
+        span {
+            font-size: 18px;
+        }
+    }
+
+    .input-wrap {
+        background: #F1F1F1;
+        padding: 8px;
+        border-top-right-radius: 9px;
+        border-bottom-right-radius: 9px;
+        display: inline-block;
+
+        input {
+            border: none;
+            background: transparent;
+            font-size: 18px;
+            font-family: helvetica;
+            font-weight: bold;
+            color: #454545;
+            outline: none;
+            width: 200px;
+
+            &::placeholder {
+                color: #B1B1B1;
+            }
+        }
+
+        img {
+            cursor: pointer;
+            float: right;
+            margin-top: 2px;
+        }
     }
 }
