@@ -1,22 +1,22 @@
 <div [ngClass]="{'light-theme': isLightTheme | async}">
-
-    <p>user-overview works!</p>
     <h3>Common picks:</h3>
     <a routerLink="/league/KingOfTryndamere">go to KingOfTryndamere~~~!</a>
     <br>
     <a routerLink="/league/tugatom">go to tugatom~~~!</a>
 
-    <div>
-        <h1>Summoner Form</h1>
-        <div>
-            <label for="nameInput">Summoner Name</label>
-            <input type="text" id="nameInput" #nameInput required>
-        </div>
+    <mat-card class="search-card">
+        <mat-card-content>
+            <div class="na-wrap">
+                <span>NA</span>
+            </div>
+            <div class="input-wrap">
+                <input (keyup.enter)="onSubmit(nameInput.value)" type="text" id="nameInput" placeholder="Search..." #nameInput required>
+                <img (click)="onSubmit(nameInput.value)" src="../../../assets/searchIcon.png"/>
+            </div>
+        </mat-card-content>
+    </mat-card>
 
-        <button (click)="onSubmit(nameInput.value)">Submit</button>
-    </div>
-
-    <div *ngIf="account else noAccount">
+    <div *ngIf="account else noAccount" style="margin-top: 45px;">
         <div class="profile-image-wrapper">
             <img [src]="profileIconSource" class="profile-image"/>
             <img [src]="prestigeCrestSource" class="profile-crest"/>
@@ -31,9 +31,18 @@
         <img [src]="defaultPrestigeCrestSource" class="profile-image"/>
     </ng-template>
 
-    <app-ranked-info-card [rankedEntry]="rankedSoloQueue" [cardName]="rankedSoloQueueCardName"></app-ranked-info-card>
-    <!-- <app-ranked-info-card [entry]="rankedFlexSR" [cardName]="rankedFlexSRCardName"></app-ranked-info-card> -->
-    <!-- <app-ranked-info-card [entry]="rankedFlexTT" [cardName]="rankedFlexTTCardName"></app-ranked-info-card> -->
+    <app-ranked-info-card *ngIf="rankedSoloQueue else noRankedSoloQueueEntry" [entry]="rankedSoloQueue" [cardName]="rankedSoloQueueCardName"></app-ranked-info-card>
+    <ng-template #noRankedSoloQueueEntry>
+        <app-ranked-info-card [cardName]="rankedSoloQueueCardName"></app-ranked-info-card>
+    </ng-template>
+    <app-ranked-info-card *ngIf="rankedFlexSR else noRankedFlexSR" [entry]="rankedFlexSR" [cardName]="rankedFlexSRCardName"></app-ranked-info-card>
+    <ng-template #noRankedFlexSR>
+        <app-ranked-info-card [cardName]="rankedFlexSRCardName"></app-ranked-info-card>
+    </ng-template>
+    <app-ranked-info-card *ngIf="rankedFlexTTCardName else noRankedFlexTTCardName" [entry]="rankedFlexTT" [cardName]="rankedFlexTTCardName"></app-ranked-info-card>
+    <ng-template #noRankedFlexTTCardName>
+        <app-ranked-info-card [cardName]="rankedFlexTTCardName"></app-ranked-info-card>
+    </ng-template>
 
     <!-- <h3>Most Played: Ranked Solo Queue</h3>
     <div *ngFor="mostPlayedChampions as champion">
@@ -49,13 +58,13 @@
     </div> -->
 
     <!-- <h3>Match History</h3> -->
-    <mat-card class="match-history-title-card mat-elevation-z0">
+    <mat-card class="default-card match-history-title-card mat-elevation-z0" [ngClass]="{'light-theme': isLightTheme | async}">
         <mat-card-content>
             <h2>Match History</h2>
         </mat-card-content>
     </mat-card>
 
     <div *ngFor="let match of matchlistMatches">
-        <app-match [matchlistMatch]="match" [account]="account"></app-match>
+        <app-match [matchlistMatch]="match" [account]="account" (matchNew)="gotMatch($event)"></app-match>
     </div>
 </div>
