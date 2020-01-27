@@ -1,21 +1,21 @@
-<mat-card class="ranked-info-card mat-elevation-z0" *ngIf="entryDone else noentryDone" [ngClass]="{'light-theme': isLightTheme | async}">
+<mat-card class="default-card ranked-info-card mat-elevation-z0" *ngIf="entry else noentry" [ngClass]="{'light-theme': isLightTheme | async}">
     <mat-card-content>
-        <img [src]="entryDone.emblemImageSource" class="ranked-emblem-image"/>
+        <img [src]="entry.emblemImageSource" class="ranked-emblem-image"/>
         <div class="ranked-info-tier">
             <h2>{{cardName}}<br>
-                <span class="rank-number">{{entryDone.tier | titlecase}} {{entryDone.rank}}</span>
+                <span class="rank-number">{{entry.tier | titlecase}} {{entry.rank}}</span>
             </h2>
         </div>
         <div class="ranked-info-points-wrapper">
-            <p>{{entryDone.leaguePoints}} LP</p>
-            <p>{{entryDone.wins}}W {{entryDone.losses}}L</p>
-            <p><span [ngClass]="{'bad-winrate': entryDone.badWinrate}">{{entryDone.winrate | number:'1.0-0'}}%</span> W.R.</p>
+            <p>{{entry.leaguePoints}} LP</p>
+            <p>{{entry.wins}}W {{entry.losses}}L</p>
+            <p><span [ngClass]="{'bad-winrate': entry.badWinrate}">{{entry.winrate | number:'1.0-0'}}%</span> W.R.</p>
         </div>
     </mat-card-content>
 </mat-card>
 
-<ng-template #noentryDone>
-    <mat-card class="ranked-info-card mat-elevation-z0" [ngClass]="{'light-theme': isLightTheme | async}">
+<ng-template #noentry>
+    <mat-card class="default-card ranked-info-card mat-elevation-z0" [ngClass]="{'light-theme': isLightTheme | async}">
         <mat-card-content>
             <img src="/assets/ranked-emblems/unranked2.png" class="ranked-emblem-image unranked-emblem-image"/>
             <div class="ranked-info-tier">
