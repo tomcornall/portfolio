@@ -1,9 +1,9 @@
-<h1>
-  {{title}}
-</h1>
-
-<button routerLink="/league">League</button>
-<button routerLink="/resume">Resume</button>
-<button routerLink="">Home</button>
+<mat-toolbar class="main-header" color="secondary">
+  <mat-toolbar-row>
+    <button routerLink="">Home</button>
+    <button class="league-button" routerLink="/league">League</button>
+    <button routerLink="/resume">Resume</button>
+  </mat-toolbar-row>
+</mat-toolbar>
 
 <router-outlet></router-outlet>
