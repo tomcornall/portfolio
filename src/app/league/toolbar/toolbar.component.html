@@ -1,7 +1,7 @@
-<p>toolbar works!</p>
 <mat-toolbar class="league-toolbar" color="primary">
   <mat-toolbar-row>
-    <p>Theme Demo</p>
+    <img src="../../../assets/league-logo.png"/>
+    <p class="league-title">League of Legends</p>
     <mat-slide-toggle class="league-theme-toggle" [checked]="isLightTheme | async" (change)="toggleLightTheme($event.checked)">Light theme</mat-slide-toggle>
   </mat-toolbar-row>
 </mat-toolbar>
