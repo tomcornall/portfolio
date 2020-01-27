@@ -52,13 +52,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background: #313131;
     font-size: 14px;
     .mat-slide-toggle-bar {
+        background-color: rgba(255, 215, 64, 0.54);
         height: 10px;
         width: 22px;
         .mat-slide-toggle-thumb-container {
+            cursor: pointer;
             height: 14px;
             width: 14px;
             margin-top: 1px;
             .mat-slide-toggle-thumb {
+                background-color: #ffd740;
                 height: 14px;
                 width: 14px;
             }
@@ -67,5 +70,27 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     &.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb-container {
         transform: translate3d(12px,0,0);
     }
+
+    .mat-slide-toggle-content {
+        font-family: Helvetica;
+        font-weight: bold;
+    }
 }
 
+/*
+ * Global card default styling
+ */
+.default-card {
+    max-width: 250px;
+    font-family: Helvetica;
+    color: white;
+    margin: 1em;
+    border: 1px solid #525252;
+    background: #212121;
+
+    &.light-theme {
+        color: #444444;
+        border: 1px solid #d6d6d6;
+        background: white;
+    }
+}
