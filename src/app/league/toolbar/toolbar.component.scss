@@ -1,3 +1,15 @@
+.league-title {
+    font-size: 12px;
+    color: #FFCF11;
+    margin-right: 20px;
+    margin-left: 0.75em;
+}
+
 .league-toolbar {
+    min-height: unset;
     background: #505050;
+
+    mat-toolbar-row {
+        height: 41px;
+    }
 }
