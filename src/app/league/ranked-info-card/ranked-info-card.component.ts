@@ -9,7 +9,7 @@ import { RankedEntry } from '../ranked-entry';
   styleUrls: ['./ranked-info-card.component.scss']
 })
 export class RankedInfoCardComponent implements OnInit {
-  @Input() rankedEntry: RankedEntry;
+  @Input() entry: RankedEntry;
   @Input() cardName: string;
   entryDone: RankedEntry;
   isLightTheme: Observable<boolean>;
@@ -20,13 +20,8 @@ export class RankedInfoCardComponent implements OnInit {
 
   ngOnInit() {
     this.isLightTheme = this.themeService.isLightTheme;
-    console.log('###testing entry...');
-    console.log(this.rankedEntry);
-    if (this.rankedEntry) {
-      console.log('###got rankedEntry!');
-      console.log(this.rankedEntry);
-      this.setupRankedData(this.rankedEntry);
-    }
+
+    this.setupRankedData();
   }
 
   /**
@@ -34,19 +29,17 @@ export class RankedInfoCardComponent implements OnInit {
    *   - entry.emblemImageSource
    *   - entry.winrate
    */
-  private setupRankedData(entry: RankedEntry) {
-    entry.emblemImageSource = `/assets/ranked-emblems/Emblem_${entry.tier}.png`;
+  private setupRankedData() {
+    this.entry.emblemImageSource = `/assets/ranked-emblems/Emblem_${this.entry.tier}.png`;
 
-    if (entry.losses) {
-      entry.winrate = entry.wins / (entry.wins + entry.losses) * 100;
+    if (this.entry.losses) {
+      this.entry.winrate = this.entry.wins / (this.entry.wins + this.entry.losses) * 100;
     } else {
-      entry.winrate = 100;
+      this.entry.winrate = 100;
     }
 
-    if (entry.winrate < 50) {
-      entry.badWinrate = true;
+    if (this.entry.winrate < 50) {
+      this.entry.badWinrate = true;
     }
-
-    this.entryDone = entry;
   }
 }
