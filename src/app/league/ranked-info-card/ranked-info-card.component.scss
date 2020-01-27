@@ -1,16 +1,4 @@
 .ranked-info-card {
-    max-width: 250px;
-    font-family: Helvetica;
-    color: white;
-    margin: 1em;
-    border: 1px solid #525252;
-    background: #212121;
-
-    &.light-theme {
-        color: #444444;
-        border: 1px solid #d6d6d6;
-        background: white;
-    }
 
     mat-card-content {
         display: flex;
