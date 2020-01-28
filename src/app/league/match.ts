@@ -18,4 +18,6 @@ export class Match {
     team2Participants: any[];
     team1Kills: number;
     team2Kills: number;
+    mainParticipant?: any;
+    last?: boolean;
 }
