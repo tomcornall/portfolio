@@ -12,4 +12,5 @@ export class MatchlistMatch {
     season: number;
     timeline: MatchTimeline;
     match: Match;
+    last?: boolean;
 }
