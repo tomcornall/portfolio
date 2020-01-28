@@ -25,8 +25,8 @@ export class LeagueApiService {
     private http: HttpClient
   ) { }
 
-  getMatchlist(id: string): Observable<Matchlist> {
-    this.httpOptions.params = this.httpOptions.params.set('endpoint', `/lol/match/v4/matchlists/by-account/${id}?endIndex=5`);
+  getMatchlist(id: string, count): Observable<Matchlist> {
+    this.httpOptions.params = this.httpOptions.params.set('endpoint', `/lol/match/v4/matchlists/by-account/${id}?endIndex=${count}`);
 
     return this.http.get<Matchlist>(this.url, this.httpOptions).pipe(
       tap(_ => console.log(`fetched Matchlist id=${id}`)),
