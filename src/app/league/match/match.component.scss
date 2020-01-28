@@ -24,16 +24,6 @@
 
 // }
 
-/* 
- * Generic Material Modifier Classes 
- */
-.center-align-tile-contents {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center; // vertical alignment
-}
-
 .height-max {
     height: 100%;
 }
@@ -266,6 +256,9 @@ mat-divider {
 .champion-grid-list {
     width: 175px;
     .team-player-name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         flex: auto;
         color: #b1b1b1;
     }
@@ -382,7 +375,7 @@ mat-divider {
 
 @media (min-width: 800px) {
     .match-card {
-        max-width: 800px;
+        max-width: 650px;
     }
 
     .match-card-grid-list {
@@ -450,6 +443,7 @@ mat-divider {
     }
 
     .role-icon-grid-list {
+        margin-right: 5px;
         filter: invert(1);
     }
 
