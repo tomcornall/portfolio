@@ -37,6 +37,8 @@
 }
 
 .match-history-title-card {
+    max-width: 644px;
+
     h2 {
         font-size: 18px;
         text-align: center;
@@ -101,6 +103,35 @@
             cursor: pointer;
             float: right;
             margin-top: 2px;
+        }
+    }
+}
+
+.recent-history-summary {
+    .win-box {
+        display: inline-block;
+        background-color: #5c8af1;
+        height: 20px;
+    }
+
+    .loss-box {
+        display: inline-block;
+        background-color: #d45252;
+        height: 20px;
+    }
+
+    .recent-champion-image {
+        width: 36px;
+        border-radius: 100%;
+        border-width: 2px;
+        border-color: grey;
+        border-style: solid;
+    }
+
+    .recent-champion-grid-list {
+        p {
+            text-align: center;
+            line-height: 1.35em;
         }
     }
 }
