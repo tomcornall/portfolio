@@ -135,7 +135,9 @@
                     <mat-grid-list cols="1" rowHeight="20px" class="champion-grid-list">
                         <mat-grid-tile *ngFor="let participant of match.team2Participants" colspan="1" rowspan="1">
                             <div class="center-align-tile-contents">
-                                <img src="../../../assets/champion/{{ participant.champion.image.full }}" class="champion-sprite"/>
+                                <img src="../../../assets/champion/{{ participant.champion.image.full }}" class="champion-sprite"
+                                (load)="loadedLastImage(match.last)"
+                                />
                                 <p class="team-player-name" [ngClass]="{'main-participant': participant.mainParticipant}">{{ participant.formattedSummonerName }}</p>
                                 <!-- <p>{{ participant.champion.name }}</p> -->
                             </div>
