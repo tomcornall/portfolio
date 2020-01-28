@@ -1,4 +1,5 @@
 <div [ngClass]="{'light-theme': isLightTheme | async}">
+
     <h3>Common picks:</h3>
     <a routerLink="/league/KingOfTryndamere">go to KingOfTryndamere~~~!</a>
     <br>
@@ -44,6 +45,40 @@
         <app-ranked-info-card [cardName]="rankedFlexTTCardName"></app-ranked-info-card>
     </ng-template>
 
+    <mat-card class="default-card recent-history-summary mat-elevation-z0" [ngClass]="{'light-theme': isLightTheme | async}" [@enterAnimation]="gotMatches">
+        <mat-card-content>
+            <h2>Recent Summary</h2>
+            <p>{{ gamesCount }} Games</p>
+            <p>{{ recentWins }}W • {{ recentLosses }}L</p>
+            <div class="win-box" [style.width]="winRatio+'%'"></div >
+            <div class="loss-box" [style.width]="lossRatio+'%'"></div>
+            <ng-container *ngFor="let champion of champions">
+                <mat-grid-list *ngIf="champion" cols="4" rowHeight="50px" class="recent-champion-grid-list">
+                    <mat-grid-tile colspan="1" rowspan="1">
+                        <div class="center-align-tile-contents">
+                            <img src="../../../assets/champion/{{ champion.imageSource }}" class="recent-champion-image" [style.border-color]="champion.borderColor"/>
+                        </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile colspan="1" rowspan="1">
+                        <div class="center-align-tile-contents">
+                            <p>{{ champion.championName }}</p>
+                        </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile colspan="1" rowspan="1">
+                        <div class="center-align-tile-contents">
+                            <p>{{ champion.wins }}W {{ champion.losses }}L</p>
+                        </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile colspan="1" rowspan="1">
+                        <div class="center-align-tile-contents">
+                            <p>{{ champion.winRatio }}%<br>{{ champion.games }} played</p>
+                        </div>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </ng-container>
+        </mat-card-content>
+    </mat-card>
+
     <!-- <h3>Most Played: Ranked Solo Queue</h3>
     <div *ngFor="mostPlayedChampions as champion">
         <img [src]="champion.imageSource" class="champion.imageSource"/>
@@ -58,13 +93,17 @@
     </div> -->
 
     <!-- <h3>Match History</h3> -->
+
     <mat-card class="default-card match-history-title-card mat-elevation-z0" [ngClass]="{'light-theme': isLightTheme | async}">
         <mat-card-content>
             <h2>Match History</h2>
         </mat-card-content>
     </mat-card>
 
-    <div *ngFor="let match of matchlistMatches">
-        <app-match [matchlistMatch]="match" [account]="account" (matchNew)="gotMatch($event)"></app-match>
-    </div>
+    <ng-container [@matchHistoryAnimation]="loadedImages">
+        <ng-container *ngFor="let match of matchlistMatches">
+            <app-match [matchlistMatch]="match" [account]="account" (lastImage)="loadedLastImage($event)" (matchNew)="gotMatch($event)"></app-match>
+        </ng-container>
+    </ng-container>
+
 </div>
